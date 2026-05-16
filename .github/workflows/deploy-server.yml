@@ -217,7 +217,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./wren-engine/ibis-server
-          file: ./wren-engine/ibis-server/Dockerfile
+          file: ./docker/ibis-server.Dockerfile
           platforms: ${{ env.PLATFORM }}
           build-args: |
             ENV=prod
