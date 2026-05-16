@@ -1,0 +1,83 @@
+name: Deploy to WrenAI Server
+
+on:
+  push:
+    branches:
+      - legacy/v1
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-wrenai-server
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Pull source and restart Docker Compose
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Deploy over SSH
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          DEPLOY_BRANCH: ${{ secrets.DEPLOY_BRANCH }}
+          DEPLOY_REPOSITORY: ${{ secrets.DEPLOY_REPOSITORY }}
+          DEPLOY_SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+        run: |
+          set -Eeuo pipefail
+
+          : "${DEPLOY_HOST:=82.115.8.122}"
+          : "${DEPLOY_PORT:=13121}"
+          : "${DEPLOY_USER:=root}"
+          : "${DEPLOY_PATH:=/opt/wrenai}"
+          : "${DEPLOY_BRANCH:=legacy/v1}"
+          : "${DEPLOY_REPOSITORY:=https://github.com/AminAmiri-dev/WrenAI.git}"
+
+          if [ -z "${DEPLOY_SSH_PRIVATE_KEY:-}" ]; then
+            echo "::error::DEPLOY_SSH_PRIVATE_KEY secret is not configured."
+            exit 1
+          fi
+
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_PRIVATE_KEY" > ~/.ssh/wrenai_deploy_key
+          chmod 600 ~/.ssh/wrenai_deploy_key
+          ssh-keyscan -p "$DEPLOY_PORT" "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+          ssh \
+            -i ~/.ssh/wrenai_deploy_key \
+            -p "$DEPLOY_PORT" \
+            -o BatchMode=yes \
+            "$DEPLOY_USER@$DEPLOY_HOST" \
+            "DEPLOY_PATH='$DEPLOY_PATH' DEPLOY_BRANCH='$DEPLOY_BRANCH' DEPLOY_REPOSITORY='$DEPLOY_REPOSITORY' bash -s" <<'REMOTE'
+          set -Eeuo pipefail
+
+          cd "$DEPLOY_PATH"
+          git config --global --add safe.directory "$DEPLOY_PATH"
+          git remote set-url origin "$DEPLOY_REPOSITORY"
+          git fetch --prune origin "$DEPLOY_BRANCH"
+          git checkout "$DEPLOY_BRANCH"
+          git reset --hard "origin/$DEPLOY_BRANCH"
+
+          cd docker
+          if [ ! -f .env ]; then
+            cp .env.example .env
+            sed -i 's/^TELEMETRY_ENABLED=.*/TELEMETRY_ENABLED=false/' .env
+            sed -i 's/^AI_SERVICE_FORWARD_PORT=.*/AI_SERVICE_FORWARD_PORT=127.0.0.1:5555/' .env
+            sed -i "s/^USER_UUID=.*/USER_UUID=$(cat /proc/sys/kernel/random/uuid)/" .env
+          fi
+          if [ ! -f config.yaml ]; then
+            cp config.example.yaml config.yaml
+            sed -i 's/langfuse_enable: true/langfuse_enable: false/' config.yaml
+          fi
+
+          docker compose --env-file .env pull
+          docker compose --env-file .env up -d --remove-orphans
+          docker compose --env-file .env ps
+          curl -fsSI --max-time 30 http://127.0.0.1:3000/ >/dev/null
+          REMOTE
