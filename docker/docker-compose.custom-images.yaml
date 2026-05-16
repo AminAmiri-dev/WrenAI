@@ -1,0 +1,15 @@
+services:
+  bootstrap:
+    image: ${WREN_BOOTSTRAP_IMAGE:-ghcr.io/canner/wren-bootstrap}:${WREN_BOOTSTRAP_VERSION}
+
+  wren-engine:
+    image: ${WREN_ENGINE_IMAGE:-ghcr.io/canner/wren-engine}:${WREN_ENGINE_VERSION}
+
+  ibis-server:
+    image: ${IBIS_SERVER_IMAGE:-ghcr.io/canner/wren-engine-ibis}:${IBIS_SERVER_VERSION}
+
+  wren-ai-service:
+    image: ${WREN_AI_SERVICE_IMAGE:-ghcr.io/canner/wren-ai-service}:${WREN_AI_SERVICE_VERSION}
+
+  wren-ui:
+    image: ${WREN_UI_IMAGE:-ghcr.io/canner/wren-ui}:${WREN_UI_VERSION}

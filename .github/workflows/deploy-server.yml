@@ -1,4 +1,4 @@
-name: Deploy to WrenAI Server
+name: Build and Deploy WrenAI
 
 on:
   push:
@@ -10,13 +10,242 @@ concurrency:
   group: deploy-wrenai-server
   cancel-in-progress: false
 
-jobs:
-  deploy:
-    name: Pull source and restart Docker Compose
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
+permissions:
+  contents: read
+  packages: write
 
+env:
+  PLATFORM: linux/amd64
+
+jobs:
+  prepare:
+    name: Prepare release metadata
+    runs-on: ubuntu-latest
+    outputs:
+      version_tag: ${{ steps.meta.outputs.version_tag }}
+      bootstrap_image: ${{ steps.meta.outputs.bootstrap_image }}
+      engine_image: ${{ steps.meta.outputs.engine_image }}
+      ibis_image: ${{ steps.meta.outputs.ibis_image }}
+      ai_service_image: ${{ steps.meta.outputs.ai_service_image }}
+      ui_image: ${{ steps.meta.outputs.ui_image }}
+    steps:
+      - name: Prepare image names and date version
+        id: meta
+        run: |
+          set -Eeuo pipefail
+
+          owner_lc="$(printf '%s' "$GITHUB_REPOSITORY_OWNER" | tr '[:upper:]' '[:lower:]')"
+          short_sha="${GITHUB_SHA::8}"
+          timestamp="$(date -u +'%Y%m%d-%H%M%S')"
+          version_tag="custom-${timestamp}-${short_sha}"
+          image_prefix="ghcr.io/${owner_lc}"
+
+          {
+            echo "version_tag=${version_tag}"
+            echo "bootstrap_image=${image_prefix}/wrenai-bootstrap"
+            echo "engine_image=${image_prefix}/wrenai-engine"
+            echo "ibis_image=${image_prefix}/wrenai-engine-ibis"
+            echo "ai_service_image=${image_prefix}/wrenai-ai-service"
+            echo "ui_image=${image_prefix}/wrenai-ui"
+          } >> "$GITHUB_OUTPUT"
+
+          echo "Release tag: ${version_tag}"
+
+  build-bootstrap:
+    name: Build bootstrap image
+    runs-on: ubuntu-latest
+    needs: prepare
+    steps:
+      - uses: actions/checkout@v4
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build and push bootstrap
+        uses: docker/build-push-action@v6
+        with:
+          context: ./docker/bootstrap
+          platforms: ${{ env.PLATFORM }}
+          tags: |
+            ${{ needs.prepare.outputs.bootstrap_image }}:${{ needs.prepare.outputs.version_tag }}
+            ${{ needs.prepare.outputs.bootstrap_image }}:latest
+          labels: |
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.version=${{ needs.prepare.outputs.version_tag }}
+          cache-from: type=gha,scope=wrenai-bootstrap
+          cache-to: type=gha,mode=max,scope=wrenai-bootstrap
+          push: true
+
+  build-ui:
+    name: Build UI image
+    runs-on: ubuntu-latest
+    needs: prepare
+    steps:
+      - uses: actions/checkout@v4
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build and push UI
+        uses: docker/build-push-action@v6
+        with:
+          context: ./wren-ui
+          platforms: ${{ env.PLATFORM }}
+          tags: |
+            ${{ needs.prepare.outputs.ui_image }}:${{ needs.prepare.outputs.version_tag }}
+            ${{ needs.prepare.outputs.ui_image }}:latest
+          labels: |
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.version=${{ needs.prepare.outputs.version_tag }}
+          cache-from: type=gha,scope=wrenai-ui
+          cache-to: type=gha,mode=max,scope=wrenai-ui
+          push: true
+
+  build-ai-service:
+    name: Build AI service image
+    runs-on: ubuntu-latest
+    needs: prepare
+    steps:
+      - uses: actions/checkout@v4
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build and push AI service
+        uses: docker/build-push-action@v6
+        with:
+          context: ./wren-ai-service
+          file: ./wren-ai-service/docker/Dockerfile
+          platforms: ${{ env.PLATFORM }}
+          tags: |
+            ${{ needs.prepare.outputs.ai_service_image }}:${{ needs.prepare.outputs.version_tag }}
+            ${{ needs.prepare.outputs.ai_service_image }}:latest
+          labels: |
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.version=${{ needs.prepare.outputs.version_tag }}
+          cache-from: type=gha,scope=wrenai-ai-service
+          cache-to: type=gha,mode=max,scope=wrenai-ai-service
+          push: true
+
+  build-engine:
+    name: Build engine image
+    runs-on: ubuntu-latest
+    needs: prepare
+    steps:
+      - name: Use HTTPS for submodules
+        run: git config --global url."https://github.com/".insteadOf "git@github.com:"
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - name: Build engine executable jar
+        working-directory: wren-engine/wren-core-legacy
+        run: ./mvnw clean install -B -DskipTests -P exec-jar
+      - name: Prepare engine Docker context
+        id: engine
+        working-directory: wren-engine/wren-core-legacy
+        run: |
+          set -Eeuo pipefail
+          wren_version="$(./mvnw --quiet help:evaluate -Dexpression=project.version -DforceStdout)"
+          cp "./wren-server/target/wren-server-${wren_version}-executable.jar" ./docker/
+          echo "wren_version=${wren_version}" >> "$GITHUB_OUTPUT"
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build and push engine
+        uses: docker/build-push-action@v6
+        with:
+          context: ./wren-engine/wren-core-legacy/docker
+          platforms: ${{ env.PLATFORM }}
+          build-args: |
+            WREN_VERSION=${{ steps.engine.outputs.wren_version }}
+          tags: |
+            ${{ needs.prepare.outputs.engine_image }}:${{ needs.prepare.outputs.version_tag }}
+            ${{ needs.prepare.outputs.engine_image }}:latest
+          labels: |
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.version=${{ needs.prepare.outputs.version_tag }}
+          cache-from: type=gha,scope=wrenai-engine
+          cache-to: type=gha,mode=max,scope=wrenai-engine
+          push: true
+
+  build-ibis:
+    name: Build ibis server image
+    runs-on: ubuntu-latest
+    needs: prepare
+    steps:
+      - name: Use HTTPS for submodules
+        run: git config --global url."https://github.com/".insteadOf "git@github.com:"
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build and push ibis server
+        uses: docker/build-push-action@v6
+        with:
+          context: ./wren-engine/ibis-server
+          file: ./wren-engine/ibis-server/Dockerfile
+          platforms: ${{ env.PLATFORM }}
+          build-args: |
+            ENV=prod
+          build-contexts: |
+            wren-core-py=./wren-engine/wren-core-py
+            wren-core=./wren-engine/wren-core
+            wren-core-base=./wren-engine/wren-core-base
+          tags: |
+            ${{ needs.prepare.outputs.ibis_image }}:${{ needs.prepare.outputs.version_tag }}
+            ${{ needs.prepare.outputs.ibis_image }}:latest
+          labels: |
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.version=${{ needs.prepare.outputs.version_tag }}
+          cache-from: type=gha,scope=wrenai-ibis
+          cache-to: type=gha,mode=max,scope=wrenai-ibis
+          push: true
+
+  deploy:
+    name: Deploy custom images to server
+    runs-on: ubuntu-latest
+    needs:
+      - prepare
+      - build-bootstrap
+      - build-ui
+      - build-ai-service
+      - build-engine
+      - build-ibis
     steps:
       - name: Deploy over SSH
         env:
@@ -27,6 +256,14 @@ jobs:
           DEPLOY_BRANCH: ${{ secrets.DEPLOY_BRANCH }}
           DEPLOY_REPOSITORY: ${{ secrets.DEPLOY_REPOSITORY }}
           DEPLOY_SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+          GHCR_ACTOR: ${{ github.actor }}
+          GHCR_TOKEN: ${{ github.token }}
+          VERSION_TAG: ${{ needs.prepare.outputs.version_tag }}
+          WREN_BOOTSTRAP_IMAGE: ${{ needs.prepare.outputs.bootstrap_image }}
+          WREN_ENGINE_IMAGE: ${{ needs.prepare.outputs.engine_image }}
+          IBIS_SERVER_IMAGE: ${{ needs.prepare.outputs.ibis_image }}
+          WREN_AI_SERVICE_IMAGE: ${{ needs.prepare.outputs.ai_service_image }}
+          WREN_UI_IMAGE: ${{ needs.prepare.outputs.ui_image }}
         run: |
           set -Eeuo pipefail
 
@@ -54,15 +291,29 @@ jobs:
             -p "$DEPLOY_PORT" \
             -o BatchMode=yes \
             "$DEPLOY_USER@$DEPLOY_HOST" \
-            "DEPLOY_PATH='$DEPLOY_PATH' DEPLOY_BRANCH='$DEPLOY_BRANCH' DEPLOY_REPOSITORY='$DEPLOY_REPOSITORY' bash -s" <<'REMOTE'
+            "DEPLOY_PATH='$DEPLOY_PATH' DEPLOY_BRANCH='$DEPLOY_BRANCH' DEPLOY_REPOSITORY='$DEPLOY_REPOSITORY' VERSION_TAG='$VERSION_TAG' WREN_BOOTSTRAP_IMAGE='$WREN_BOOTSTRAP_IMAGE' WREN_ENGINE_IMAGE='$WREN_ENGINE_IMAGE' IBIS_SERVER_IMAGE='$IBIS_SERVER_IMAGE' WREN_AI_SERVICE_IMAGE='$WREN_AI_SERVICE_IMAGE' WREN_UI_IMAGE='$WREN_UI_IMAGE' GHCR_ACTOR='$GHCR_ACTOR' GHCR_TOKEN='$GHCR_TOKEN' bash -s" <<'REMOTE'
           set -Eeuo pipefail
+
+          set_env() {
+            key="$1"
+            value="$2"
+            escaped_value="$(printf '%s' "$value" | sed -e 's/[\/&]/\\&/g')"
+            if grep -q "^${key}=" .env; then
+              sed -i "s/^${key}=.*/${key}=${escaped_value}/" .env
+            else
+              printf '\n%s=%s\n' "$key" "$value" >> .env
+            fi
+          }
 
           cd "$DEPLOY_PATH"
           git config --global --add safe.directory "$DEPLOY_PATH"
+          git config --global url."https://github.com/".insteadOf "git@github.com:"
           git remote set-url origin "$DEPLOY_REPOSITORY"
           git fetch --prune origin "$DEPLOY_BRANCH"
           git checkout "$DEPLOY_BRANCH"
           git reset --hard "origin/$DEPLOY_BRANCH"
+          git submodule sync --recursive
+          git submodule update --init --recursive --depth 1
 
           cd docker
           if [ ! -f .env ]; then
@@ -76,8 +327,24 @@ jobs:
             sed -i 's/langfuse_enable: true/langfuse_enable: false/' config.yaml
           fi
 
-          docker compose --env-file .env pull
-          docker compose --env-file .env up -d --remove-orphans
-          docker compose --env-file .env ps
+          set_env WREN_BOOTSTRAP_IMAGE "$WREN_BOOTSTRAP_IMAGE"
+          set_env WREN_ENGINE_IMAGE "$WREN_ENGINE_IMAGE"
+          set_env IBIS_SERVER_IMAGE "$IBIS_SERVER_IMAGE"
+          set_env WREN_AI_SERVICE_IMAGE "$WREN_AI_SERVICE_IMAGE"
+          set_env WREN_UI_IMAGE "$WREN_UI_IMAGE"
+          set_env WREN_PRODUCT_VERSION "$VERSION_TAG"
+          set_env WREN_BOOTSTRAP_VERSION "$VERSION_TAG"
+          set_env WREN_ENGINE_VERSION "$VERSION_TAG"
+          set_env IBIS_SERVER_VERSION "$VERSION_TAG"
+          set_env WREN_AI_SERVICE_VERSION "$VERSION_TAG"
+          set_env WREN_UI_VERSION "$VERSION_TAG"
+          set_env TELEMETRY_ENABLED false
+          set_env AI_SERVICE_FORWARD_PORT 127.0.0.1:5555
+
+          printf '%s' "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_ACTOR" --password-stdin
+          docker compose --env-file .env -f docker-compose.yaml -f docker-compose.custom-images.yaml pull
+          docker compose --env-file .env -f docker-compose.yaml -f docker-compose.custom-images.yaml up -d --remove-orphans
+          docker compose --env-file .env -f docker-compose.yaml -f docker-compose.custom-images.yaml ps
           curl -fsSI --max-time 30 http://127.0.0.1:3000/ >/dev/null
+          docker image prune -af --filter "until=168h" >/dev/null || true
           REMOTE
