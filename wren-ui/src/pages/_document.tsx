@@ -31,9 +31,9 @@ export default class AppDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html lang="fa" dir="rtl">
         <Head>{this.props.styles}</Head>
-        <body>
+        <body dir="rtl">
           <Main />
           <NextScript />
         </body>

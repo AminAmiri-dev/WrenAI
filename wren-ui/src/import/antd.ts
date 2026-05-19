@@ -19,7 +19,7 @@ export { default as Collapse } from 'antd/lib/collapse';
 // export { default as Checkbox } from 'antd/lib/checkbox';
 export { default as Col } from 'antd/lib/col';
 // export { default as Comment } from 'antd/lib/comment';
-// export { default as ConfigProvider } from 'antd/lib/config-provider';
+export { default as ConfigProvider } from 'antd/lib/config-provider';
 export { default as DatePicker } from 'antd/lib/date-picker';
 // export { default as Descriptions } from 'antd/lib/descriptions';
 export { default as Divider } from 'antd/lib/divider';

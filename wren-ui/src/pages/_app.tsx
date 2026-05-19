@@ -1,12 +1,14 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { Spin } from 'antd';
+import { ConfigProvider, Spin } from 'antd';
+import faIR from 'antd/lib/locale/fa_IR';
 import posthog from 'posthog-js';
 import apolloClient from '@/apollo/client';
 import { GlobalConfigProvider } from '@/hooks/useGlobalConfig';
 import { PostHogProvider } from 'posthog-js/react';
 import { ApolloProvider } from '@apollo/client';
 import { defaultIndicator } from '@/components/PageLoading';
+import Persianize from '@/components/Persianize';
 
 require('../styles/index.less');
 
@@ -19,15 +21,18 @@ function App({ Component, pageProps }: AppProps) {
         <title>Wren AI</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <GlobalConfigProvider>
-        <ApolloProvider client={apolloClient}>
-          <PostHogProvider client={posthog}>
-            <main className="app">
-              <Component {...pageProps} />
-            </main>
-          </PostHogProvider>
-        </ApolloProvider>
-      </GlobalConfigProvider>
+      <ConfigProvider locale={faIR} direction="rtl">
+        <GlobalConfigProvider>
+          <ApolloProvider client={apolloClient}>
+            <PostHogProvider client={posthog}>
+              <Persianize />
+              <main className="app">
+                <Component {...pageProps} />
+              </main>
+            </PostHogProvider>
+          </ApolloProvider>
+        </GlobalConfigProvider>
+      </ConfigProvider>
     </>
   );
 }

@@ -7,6 +7,38 @@ body {
   min-width: 360px;
 }
 
+html[lang='fa'] body {
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+html[dir='rtl'] {
+  code,
+  pre,
+  .ace_editor,
+  .ace_editor *,
+  .ant-input-number-input,
+  .ant-typography code,
+  .adm-code,
+  .vega-embed {
+    direction: ltr;
+    text-align: left;
+  }
+
+  .ant-form-item-label,
+  .ant-modal-confirm-title,
+  .ant-modal-confirm-content,
+  .ant-drawer-title,
+  .ant-table,
+  .ant-tabs,
+  .ant-menu {
+    text-align: right;
+  }
+
+  .ant-space {
+    direction: inherit;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   html body {
     background: #fff;
