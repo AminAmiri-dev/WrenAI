@@ -18,7 +18,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Wren AI</title>
+        <title>داده یار</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ConfigProvider locale={faIR} direction="rtl">

@@ -41,11 +41,11 @@ const Toolbar = (props: { dataSource: string; onClick: () => void }) => {
     <div className="d-flex justify-space-between align-center px-1">
       <span className="d-flex align-center gx-2">
         <Logo size={16} />
-        Wren SQL
+        SQL داده یار
       </span>
       <Button className="px-0" type="link" size="small" onClick={onClick}>
         <SelectOutlined />
-        Import from {name} SQL
+        ورود از SQL {name}
       </Button>
     </div>
   );
@@ -214,15 +214,15 @@ export default function QuestionSQLPairModal(props: Props) {
                 type="secondary"
                 className="text-sm gray-7 text-left"
               >
-                The SQL statement used here follows <b>Wren SQL</b>, which is
-                based on ANSI SQL and optimized for Wren AI.{` `}
+                عبارت SQL این بخش بر پایه <b>SQL داده یار</b> است؛ با ANSI SQL
+                سازگار شده و برای داده یار بهینه شده است.{` `}
                 <Typography.Link
                   type="secondary"
                   href="https://docs.getwren.ai/oss/guide/home/wren_sql"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Learn more about the syntax.
+                  راهنمای syntax
                 </Typography.Link>
               </Typography.Text>
             </div>

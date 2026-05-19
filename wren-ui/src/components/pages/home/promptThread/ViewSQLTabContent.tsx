@@ -92,8 +92,8 @@ export default function ViewSQLTabContent(props: AnswerResultProps) {
     if (!nativeSQLResult.nativeSQLMode) {
       message.success(
         <>
-          شما Wren SQL را کپی کردید. این dialect مخصوص Wren Engine است و شاید
-          مستقیم روی پایگاه داده شما اجرا نشود.
+          شما SQL داده یار را کپی کردید. این dialect مخصوص موتور داده یار است و
+          شاید مستقیم روی پایگاه داده شما اجرا نشود.
           {hasNativeSQL && (
             <>
               {' '}
@@ -112,16 +112,16 @@ export default function ViewSQLTabContent(props: AnswerResultProps) {
         className="mb-3 adm-alert-info"
         message={
           <>
-            به صورت پیش فرض Wren SQL را می بینید. اگر می خواهید این پرس وجو را
-            روی پایگاه داده خودتان اجرا کنید، روی «نمایش SQL اصلی» کلیک کنید تا
-            syntax دقیق را بگیرید.
+            به صورت پیش فرض SQL داده یار را می بینید. اگر می خواهید این پرس وجو
+            را روی پایگاه داده خودتان اجرا کنید، روی «نمایش SQL اصلی» کلیک کنید
+            تا syntax دقیق را بگیرید.
             <Typography.Link
               className="underline ml-1"
               href="https://docs.getwren.ai/oss/guide/home/wren_sql"
               target="_blank"
               rel="noopener noreferrer"
             >
-              درباره Wren SQL بیشتر بدانید
+              درباره SQL داده یار بیشتر بدانید
             </Typography.Link>
           </>
         }
@@ -146,7 +146,7 @@ export default function ViewSQLTabContent(props: AnswerResultProps) {
             ) : (
               <span className="d-flex align-center gx-2">
                 <Logo size={18} />
-                <Text className="gray-8 text-medium text-sm">Wren SQL</Text>
+                <Text className="gray-8 text-medium text-sm">SQL داده یار</Text>
               </span>
             )}
           </div>

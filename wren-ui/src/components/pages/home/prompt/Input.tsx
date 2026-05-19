@@ -2,18 +2,22 @@ import { useEffect, useRef, useState } from 'react';
 import { Input, Button } from 'antd';
 import styled from 'styled-components';
 import ArrowUpOutlined from '@ant-design/icons/ArrowUpOutlined';
+import DownOutlined from '@ant-design/icons/DownOutlined';
+import PlusOutlined from '@ant-design/icons/PlusOutlined';
 import { attachLoading } from '@/utils/helper';
 
 const InputShell = styled.div`
   display: flex;
-  align-items: flex-end;
-  gap: 10px;
+  align-items: center;
+  gap: 8px;
   width: 100%;
+  direction: rtl;
+  min-height: 50px;
 `;
 
 const StyledTextArea = styled(Input.TextArea)`
   flex: 1;
-  padding: 10px 4px;
+  padding: 10px 2px;
   border: 0;
   border-radius: 0;
   background: transparent;
@@ -22,9 +26,10 @@ const StyledTextArea = styled(Input.TextArea)`
   font-size: 15px;
   line-height: 1.7;
   resize: none;
+  text-align: right;
 
   &.ant-input {
-    min-height: 44px;
+    min-height: 42px;
     max-height: 164px;
   }
 
@@ -39,18 +44,104 @@ const StyledTextArea = styled(Input.TextArea)`
   }
 `;
 
-const PromptButton = styled(Button)`
-  width: 42px;
-  min-width: 42px;
-  height: 42px;
+const UtilityButton = styled(Button)`
+  width: 38px;
+  min-width: 38px;
+  height: 38px;
+  border: none;
   border-radius: 50%;
+  color: var(--gray-8);
+  background: transparent;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0;
 
+  &:hover,
+  &:focus {
+    color: var(--gray-10);
+    background: var(--gray-3);
+  }
+
   .anticon {
     font-size: 17px;
+  }
+
+  @media (max-width: 520px) {
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+  }
+`;
+
+const InputActions = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: none;
+`;
+
+const ModeButton = styled(Button)`
+  height: 36px;
+  padding: 0 10px;
+  border: 0;
+  color: var(--gray-7);
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+
+  &:hover,
+  &:focus {
+    color: var(--gray-9);
+    background: var(--gray-3);
+  }
+
+  .anticon {
+    font-size: 10px;
+  }
+
+  @media (max-width: 520px) {
+    display: none;
+  }
+`;
+
+const PromptButton = styled(Button)`
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: var(--gray-10);
+  color: var(--gray-1);
+  box-shadow: rgba(15, 23, 42, 0.16) 0 8px 18px -10px;
+
+  &:hover,
+  &:focus {
+    background: var(--geekblue-6) !important;
+    color: var(--gray-1) !important;
+  }
+
+  &[disabled],
+  &[disabled]:hover {
+    background: var(--gray-5) !important;
+    color: var(--gray-1) !important;
+    opacity: 0.76;
+  }
+
+  .anticon {
+    font-size: 18px;
+  }
+
+  @media (max-width: 520px) {
+    width: 38px;
+    min-width: 38px;
+    height: 38px;
   }
 `;
 
@@ -101,6 +192,12 @@ export default function PromptInput(props: Props) {
 
   return (
     <InputShell>
+      <UtilityButton
+        type="text"
+        icon={<PlusOutlined />}
+        onClick={() => $promptInput.current?.focus()}
+        aria-label="افزودن"
+      />
       <StyledTextArea
         ref={$promptInput}
         // disable grammarly
@@ -113,14 +210,20 @@ export default function PromptInput(props: Props) {
         disabled={isDisabled}
         {...inputProps}
       />
-      <PromptButton
-        type="primary"
-        size="large"
-        icon={<ArrowUpOutlined />}
-        onClick={handleAsk}
-        disabled={isDisabled}
-        aria-label="پرسیدن"
-      />
+      <InputActions>
+        <ModeButton type="text" onClick={() => $promptInput.current?.focus()}>
+          تفکر
+          <DownOutlined />
+        </ModeButton>
+        <PromptButton
+          type="primary"
+          size="large"
+          icon={<ArrowUpOutlined />}
+          onClick={handleAsk}
+          disabled={isDisabled}
+          aria-label="پرسیدن"
+        />
+      </InputActions>
     </InputShell>
   );
 }

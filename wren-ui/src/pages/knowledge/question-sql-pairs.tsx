@@ -144,16 +144,16 @@ export default function ManageQuestionSQLPairs() {
         }
         description={
           <>
-            On this page, you can manage your saved question-SQL pairs. These
-            pairs help Wren AI learn how your organization writes SQL, allowing
-            it to generate queries that better align with your expectations.{' '}
+            در این صفحه می توانید جفت های سوال و SQL ذخیره شده را مدیریت کنید.
+            این جفت ها به داده یار کمک می کنند شیوه نوشتن SQL در سازمان شما را
+            یاد بگیرد و پرس وجوهایی هماهنگ تر با انتظار شما تولید کند.{' '}
             <Link
               className="gray-8 underline"
               href="https://docs.getwren.ai/oss/guide/knowledge/question-sql-pairs"
               rel="noopener noreferrer"
               target="_blank"
             >
-              Learn more.
+              بیشتر بدانید.
             </Link>
           </>
         }

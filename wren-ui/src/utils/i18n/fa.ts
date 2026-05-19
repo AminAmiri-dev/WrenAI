@@ -4,7 +4,7 @@ type PatternTranslation = {
 };
 
 export const faText: Record<string, string> = {
-  'Wren AI': 'ورن AI',
+  'Wren AI': 'داده یار',
   Home: 'خانه',
   Modeling: 'مدل سازی',
   Knowledge: 'دانش',
@@ -13,7 +13,7 @@ export const faText: Record<string, string> = {
   Settings: 'تنظیمات',
   'Data source settings': 'تنظیمات منبع داده',
   'Project settings': 'تنظیمات پروژه',
-  'Wren AI version:': 'نسخه ورن AI:',
+  'Wren AI version:': 'نسخه داده یار:',
 
   Connect: 'اتصال',
   'Select Tables': 'انتخاب جدول ها',
@@ -88,7 +88,7 @@ export const faText: Record<string, string> = {
   'Save to knowledge': 'ذخیره در دانش',
   'View results': 'مشاهده نتایج',
   'Store this answer as a Question-SQL pair to help Wren AI improve SQL generation.':
-    'این پاسخ را به عنوان جفت سوال و SQL ذخیره کنید تا تولید SQL در ورن AI بهتر شود.',
+    'این پاسخ را به عنوان جفت سوال و SQL ذخیره کنید تا تولید SQL در داده یار بهتر شود.',
   'Learn more': 'بیشتر بدانید',
   'User-provided SQL applied': 'SQL وارد شده توسط کاربر اعمال شد',
   'Reasoning steps adjusted': 'مراحل استدلال تنظیم شد',
@@ -131,7 +131,7 @@ export const faText: Record<string, string> = {
   'Apply instruction to': 'اعمال دستورالعمل روی',
   'all queries': 'همه پرس وجوها',
   'Enter a rule that Wren AI should follow when generating SQL queries.':
-    'قانونی وارد کنید که ورن AI هنگام تولید پرس وجوهای SQL رعایت کند.',
+    'قانونی وارد کنید که داده یار هنگام تولید پرس وجوهای SQL رعایت کند.',
   'Enter an example question that should trigger this instruction.':
     'یک سوال نمونه وارد کنید که این دستورالعمل را فعال کند.',
   'Generate question': 'تولید سوال',
@@ -206,14 +206,14 @@ export const faText: Record<string, string> = {
   'Regenerate answer': 'تولید دوباره پاسخ',
   'Selected models': 'مدل های انتخاب شده',
   'Select models': 'مدل ها را انتخاب کنید',
-  'Wren SQL': 'Wren SQL',
+  'Wren SQL': 'SQL داده یار',
   'The SQL statement used here follows': 'عبارت SQL استفاده شده در اینجا از',
   'which is': 'پیروی می کند که',
   "You're viewing Wren SQL by default. If you want to run this query on your own database, click “Show original SQL” to get the exact syntax.":
-    'به صورت پیش فرض Wren SQL را می بینید. اگر می خواهید این پرس وجو را روی پایگاه داده خودتان اجرا کنید، روی «نمایش SQL اصلی» کلیک کنید تا syntax دقیق را بگیرید.',
-  'Learn more about Wren SQL': 'درباره Wren SQL بیشتر بدانید',
+    'به صورت پیش فرض SQL داده یار را می بینید. اگر می خواهید این پرس وجو را روی پایگاه داده خودتان اجرا کنید، روی «نمایش SQL اصلی» کلیک کنید تا syntax دقیق را بگیرید.',
+  'Learn more about Wren SQL': 'درباره SQL داده یار بیشتر بدانید',
   'You copied Wren SQL. This dialect is for the Wren Engine and may not run directly on your database.':
-    'شما Wren SQL را کپی کردید. این dialect مخصوص Wren Engine است و شاید مستقیم روی پایگاه داده شما اجرا نشود.',
+    'شما SQL داده یار را کپی کردید. این dialect مخصوص موتور داده یار است و شاید مستقیم روی پایگاه داده شما اجرا نشود.',
   "Sorry, we couldn't find any records that match your search criteria.":
     'متاسفانه رکوردی مطابق معیارهای جست وجوی شما پیدا نشد.',
   'Show top 25': 'نمایش ۲۵ مورد برتر',
@@ -493,6 +493,11 @@ const attributeSkipSelector = [
 ].join(',');
 
 const hasLatin = /[A-Za-z]/;
+const brandPattern = /\bWren\s*AI\b|\bWrenAI\b|\bWren\b/gi;
+
+function translateBrandTerms(value: string) {
+  return value.replace(brandPattern, 'داده یار');
+}
 
 function preserveOuterWhitespace(original: string, translated: string) {
   const leading = original.match(/^\s*/)?.[0] || '';
@@ -507,7 +512,10 @@ export function translateFaText(value: string) {
   if (!normalized) return value;
 
   const exact = faText[normalized];
-  if (exact) return preserveOuterWhitespace(value, exact);
+  if (exact) return preserveOuterWhitespace(value, translateBrandTerms(exact));
+
+  const branded = translateBrandTerms(normalized);
+  if (branded !== normalized) return preserveOuterWhitespace(value, branded);
 
   for (const item of faPatterns) {
     const match = normalized.match(item.pattern);

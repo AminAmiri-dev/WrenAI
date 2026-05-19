@@ -76,7 +76,7 @@ export default function InstructionModal(props: Props) {
         >
           <Input.TextArea
             autoFocus
-            placeholder="Enter a rule that Wren AI should follow when generating SQL queries."
+            placeholder="قانونی وارد کنید که داده یار هنگام تولید پرس وجوهای SQL رعایت کند."
             maxLength={1000}
             rows={3}
             showCount
@@ -116,7 +116,7 @@ export default function InstructionModal(props: Props) {
           <Form.Item
             label="Matching questions"
             required
-            extra="Wren AI will match user queries based on similarity and apply this instruction when relevant."
+            extra="داده یار پرسش های کاربر را بر اساس شباهت تطبیق می دهد و این دستورالعمل را در موارد مرتبط اعمال می کند."
           >
             <Form.List name="questions" initialValue={['']}>
               {(fields, { add, remove }) => (

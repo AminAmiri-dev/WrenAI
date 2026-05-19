@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { Alert, Typography, Form, Row, Col, Button } from 'antd';
 import styled from 'styled-components';
 import { DATA_SOURCES } from '@/utils/enum/dataSources';
@@ -45,15 +44,8 @@ export default function ConnectDataSource(props: Props) {
         Connect the data source
       </Typography.Title>
       <Typography.Text>
-        Vote for your favorite data sources on{' '}
-        <Link
-          href="https://github.com/Canner/WrenAI/discussions/327"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GitHub
-        </Link>
-        .
+        اطلاعات اتصال را با دقت وارد کنید تا داده یار بتواند به منبع داده وصل
+        شود.
       </Typography.Text>
 
       <StyledForm form={form} layout="vertical" className="p-6 my-6">
@@ -71,15 +63,7 @@ export default function ConnectDataSource(props: Props) {
             </DataSource>
           </Col>
           <Col className="text-right" span={12}>
-            Learn more information in the {current.label}{' '}
-            <Link
-              href={current.guide}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              setup guide
-            </Link>
-            .
+            تنظیمات اتصال {current.label}
           </Col>
         </Row>
         <current.component />

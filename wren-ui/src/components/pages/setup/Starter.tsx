@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { ComponentProps, useState } from 'react';
 import { Typography, Row, Col } from 'antd';
 import { getDataSources, getTemplates } from './utils';
@@ -43,15 +42,7 @@ export default function Starter(props) {
         Connect a data source
       </Typography.Title>
       <Typography.Text>
-        Vote for your favorite data sources on{' '}
-        <Link
-          href="https://github.com/Canner/WrenAI/discussions/327"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GitHub
-        </Link>
-        .
+        یک منبع داده را انتخاب کنید یا با داده نمونه شروع کنید.
       </Typography.Text>
       <Row className="mt-6" gutter={[16, 16]}>
         <DataSourceIterator

@@ -46,32 +46,32 @@ const EmptyDashboard = (props: {
       >
         <Logo size={48} color="var(--gray-8)" />
         <div className="text-lg text-medium text-center gray-8 mt-3">
-          No charts have been added yet
+          هنوز نموداری اضافه نشده است
         </div>
         <div className="gray-7">
-          Follow these steps to pin charts to your dashboard.{' '}
+          برای سنجاق کردن نمودارها به داشبورد این مراحل را دنبال کنید.{' '}
           <Link
             className="gray-8 underline"
             href="https://docs.getwren.ai/oss/guide/home/dashboard"
             rel="noopener noreferrer"
             target="_blank"
           >
-            Learn more
+            بیشتر بدانید
           </Link>
         </div>
         <Row className="mt-4" gutter={[16, 16]}>
           <StepIterator
             data={[
               {
-                title: '1. Create a thread',
+                title: '۱. ساخت گفتگو',
                 image: '/images/dashboard/s1.jpg',
               },
               {
-                title: '2. Generate a chart',
+                title: '۲. تولید نمودار',
                 image: '/images/dashboard/s2.jpg',
               },
               {
-                title: '3. Pin to dashboard',
+                title: '۳. سنجاق به داشبورد',
                 image: '/images/dashboard/s3.jpg',
               },
             ]}

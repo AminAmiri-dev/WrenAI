@@ -181,17 +181,17 @@ export default function ManageInstructions() {
         }
         description={
           <>
-            On this page, you can manage saved instructions that guide Wren AI
-            in generating SQL queries. These instructions help Wren AI
-            understand your data model and business rules, improving query
-            accuracy and reducing the need for manual refinements.{' '}
+            در این صفحه می توانید دستورالعمل هایی را مدیریت کنید که داده یار
+            هنگام تولید پرس وجوهای SQL از آن ها استفاده می کند. این دستورها به
+            داده یار کمک می کنند مدل داده و قوانین کسب وکار شما را بهتر بفهمد،
+            دقت پرس وجو را بالاتر ببرد و نیاز به اصلاح دستی را کمتر کند.{' '}
             <Link
               className="gray-8 underline"
               href="https://docs.getwren.ai/oss/guide/knowledge/instructions"
               rel="noopener noreferrer"
               target="_blank"
             >
-              Learn more.
+              بیشتر بدانید.
             </Link>
           </>
         }

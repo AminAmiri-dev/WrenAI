@@ -45,7 +45,7 @@ export default function Organizing(props: Props) {
       >
         {loading && !stream ? (
           <div className="d-flex align-center gx-2">
-            Thinking
+            در حال فکر کردن
             <Spinner className="gray-6" size={12} />
           </div>
         ) : (
