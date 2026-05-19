@@ -92,12 +92,12 @@ export default function ViewSQLTabContent(props: AnswerResultProps) {
     if (!nativeSQLResult.nativeSQLMode) {
       message.success(
         <>
-          You copied Wren SQL. This dialect is for the Wren Engine and may not
-          run directly on your database.
+          شما Wren SQL را کپی کردید. این dialect مخصوص Wren Engine است و شاید
+          مستقیم روی پایگاه داده شما اجرا نشود.
           {hasNativeSQL && (
             <>
               {' '}
-              Click “<b>Show original SQL</b>” to get the executable version.
+              برای دریافت نسخه قابل اجرا روی «<b>نمایش SQL اصلی</b>» کلیک کنید.
             </>
           )}
         </>,
@@ -112,16 +112,16 @@ export default function ViewSQLTabContent(props: AnswerResultProps) {
         className="mb-3 adm-alert-info"
         message={
           <>
-            You’re viewing Wren SQL by default. If you want to run this query on
-            your own database, click “Show original SQL” to get the exact
-            syntax.
+            به صورت پیش فرض Wren SQL را می بینید. اگر می خواهید این پرس وجو را
+            روی پایگاه داده خودتان اجرا کنید، روی «نمایش SQL اصلی» کلیک کنید تا
+            syntax دقیق را بگیرید.
             <Typography.Link
               className="underline ml-1"
               href="https://docs.getwren.ai/oss/guide/home/wren_sql"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Learn more about Wren SQL
+              درباره Wren SQL بیشتر بدانید
             </Typography.Link>
           </>
         }
@@ -167,7 +167,7 @@ export default function ViewSQLTabContent(props: AnswerResultProps) {
                   loading={nativeSQLResult.loading}
                 />
                 <Text className="gray-8 text-medium text-base">
-                  Show original SQL
+                  نمایش SQL اصلی
                 </Text>
               </div>
             )}
@@ -179,7 +179,7 @@ export default function ViewSQLTabContent(props: AnswerResultProps) {
               size="small"
               onClick={() => onOpenAdjustSQLModal({ sql, responseId: id })}
             >
-              Adjust SQL
+              تنظیم SQL
             </Button>
           </Space>
         </StyledToolBar>
@@ -199,7 +199,7 @@ export default function ViewSQLTabContent(props: AnswerResultProps) {
             <BinocularsIcon
               style={{
                 paddingBottom: 2,
-                marginRight: 8,
+                marginInlineEnd: 8,
               }}
             />
           }
@@ -208,7 +208,7 @@ export default function ViewSQLTabContent(props: AnswerResultProps) {
           data-ph-capture="true"
           data-ph-capture-attribute-name="view_sql_preview_data"
         >
-          View results
+          مشاهده نتایج
         </Button>
         {previewDataResult?.data?.previewData && (
           <div className="mt-2 mb-3">
@@ -220,13 +220,13 @@ export default function ViewSQLTabContent(props: AnswerResultProps) {
                 emptyText: (
                   <Empty
                     image={Empty.PRESENTED_IMAGE_SIMPLE}
-                    description="Sorry, we couldn't find any records that match your search criteria."
+                    description="متاسفانه رکوردی مطابق معیارهای جست وجوی شما پیدا نشد."
                   />
                 ),
               }}
             />
             <div className="text-right">
-              <Text className="text-base gray-6">Showing up to 500 rows</Text>
+              <Text className="text-base gray-6">نمایش حداکثر ۵۰۰ ردیف</Text>
             </div>
           </div>
         )}

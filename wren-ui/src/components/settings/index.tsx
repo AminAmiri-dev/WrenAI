@@ -127,7 +127,7 @@ export default function Settings(props: Props) {
         <StyledSider width={310} className="border-r border-gray-4">
           <div className="gray-9 text-bold py-3 px-5">
             <SettingOutlined className="mr-2" />
-            Settings
+            تنظیمات
           </div>
           <div className="p-3 flex-grow-1">
             <MenuIterator

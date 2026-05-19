@@ -56,16 +56,52 @@ export const faText: Record<string, string> = {
     'برای کاوش بیشتر داده ها سوال تکمیلی بپرسید',
   Ask: 'پرسیدن',
   Stop: 'توقف',
+  Close: 'بستن',
+  New: 'جدید',
+  Rename: 'تغییر نام',
+  Threads: 'گفتگوها',
+  Learning: 'آموزش',
+  Finished: 'تکمیل شده',
+  'Re-run': 'اجرای دوباره',
+  Regenerate: 'تولید دوباره',
   'Try asking...': 'این سوال ها را امتحان کنید...',
   'Recommended questions': 'سوال های پیشنهادی',
+  'Thinking of good questions for you... (about 1 minute)':
+    'در حال آماده سازی سوال های مناسب برای شما... (حدود ۱ دقیقه)',
+  "We couldn't think of questions right now.":
+    'فعلا نتوانستیم سوال پیشنهادی آماده کنیم.',
+  "Let's try again later.": 'کمی بعد دوباره امتحان کنید.',
+  'Know more about your data': 'درباره داده هایتان بیشتر بدانید',
   'User Intent Recognized': 'هدف کاربر شناسایی شد',
   'Clarification needed': 'نیاز به شفاف سازی',
+  'Understanding question': 'در حال درک سوال',
+  'For the most accurate semantics, please visit the modeling page.':
+    'برای دقیق ترین معناشناسی، صفحه مدل سازی را بررسی کنید.',
   Answer: 'پاسخ',
   'View SQL': 'مشاهده SQL',
   Chart: 'نمودار',
   Beta: 'آزمایشی',
+  'Answer preparation steps': 'مراحل آماده سازی پاسخ',
+  'Answer Preparation Steps': 'مراحل آماده سازی پاسخ',
+  'Adjusted answer': 'پاسخ تنظیم شده',
+  'Adjust the answer': 'تنظیم پاسخ',
+  'Save to knowledge': 'ذخیره در دانش',
+  'View results': 'مشاهده نتایج',
+  'Store this answer as a Question-SQL pair to help Wren AI improve SQL generation.':
+    'این پاسخ را به عنوان جفت سوال و SQL ذخیره کنید تا تولید SQL در ورن AI بهتر شود.',
+  'Learn more': 'بیشتر بدانید',
+  'User-provided SQL applied': 'SQL وارد شده توسط کاربر اعمال شد',
+  'Reasoning steps adjusted': 'مراحل استدلال تنظیم شد',
   'Show original SQL': 'نمایش SQL اصلی',
   'Showing up to 500 rows': 'نمایش حداکثر ۵۰۰ ردیف',
+  'Considering the limit of the context window, we retrieve up to':
+    'با توجه به محدودیت پنجره context، حداکثر',
+  '500 rows of results to generate the answer.':
+    '۵۰۰ ردیف از نتایج برای تولید پاسخ دریافت می شود.',
+  'rows of results to generate the answer.':
+    'ردیف از نتایج برای تولید پاسخ دریافت می شود.',
+  'Click View SQL to review the step-by-step query logic and verify why the data is unavailable.':
+    'برای بررسی منطق مرحله به مرحله پرس وجو و علت نبود داده، روی «مشاهده SQL» کلیک کنید.',
   'Generated from saved view': 'تولید شده از نمای ذخیره شده',
   'Using pre-saved view': 'استفاده از نمای ذخیره شده',
   'Matching saved view found. Returning results instantly.':
@@ -129,6 +165,12 @@ export const faText: Record<string, string> = {
   'Source column deleted': 'ستون منبع حذف شده است',
   'Source column type changed': 'نوع ستون منبع تغییر کرده است',
   'Source table name': 'نام جدول منبع',
+  'Schema change detected.': 'تغییر schema شناسایی شد.',
+  'There is no schema change.': 'تغییر schema وجود ندارد.',
+  'Source table deleted resolved successfully.':
+    'حذف جدول منبع با موفقیت رفع شد.',
+  'Source column deleted resolved successfully.':
+    'حذف ستون منبع با موفقیت رفع شد.',
 
   Model: 'مدل',
   View: 'نما',
@@ -167,6 +209,14 @@ export const faText: Record<string, string> = {
   'Wren SQL': 'Wren SQL',
   'The SQL statement used here follows': 'عبارت SQL استفاده شده در اینجا از',
   'which is': 'پیروی می کند که',
+  "You're viewing Wren SQL by default. If you want to run this query on your own database, click “Show original SQL” to get the exact syntax.":
+    'به صورت پیش فرض Wren SQL را می بینید. اگر می خواهید این پرس وجو را روی پایگاه داده خودتان اجرا کنید، روی «نمایش SQL اصلی» کلیک کنید تا syntax دقیق را بگیرید.',
+  'Learn more about Wren SQL': 'درباره Wren SQL بیشتر بدانید',
+  'You copied Wren SQL. This dialect is for the Wren Engine and may not run directly on your database.':
+    'شما Wren SQL را کپی کردید. این dialect مخصوص Wren Engine است و شاید مستقیم روی پایگاه داده شما اجرا نشود.',
+  "Sorry, we couldn't find any records that match your search criteria.":
+    'متاسفانه رکوردی مطابق معیارهای جست وجوی شما پیدا نشد.',
+  'Show top 25': 'نمایش ۲۵ مورد برتر',
 
   'Cache settings': 'تنظیمات کش',
   'Refresh settings': 'تنظیمات بازخوانی',
@@ -206,6 +256,13 @@ export const faText: Record<string, string> = {
   'Connect to other data sources': 'اتصال به منابع داده دیگر',
   'Switch the language': 'تغییر زبان',
   'View full SQL': 'مشاهده SQL کامل',
+  homepage: 'صفحه خانه',
+  'Pose your questions at': 'سوال هایتان را در',
+  ', and get some helpful answers to save as views.':
+    'بپرسید و پاسخ های مناسب را به عنوان نما ذخیره کنید.',
+  'Build knowledge base: Question-SQL pairs':
+    'ساخت پایگاه دانش: جفت های سوال و SQL',
+  'Build knowledge base: Instructions': 'ساخت پایگاه دانش: دستورالعمل ها',
   'After editing the models, remember to deploy the changes.':
     'بعد از ویرایش مدل ها، فراموش نکنید تغییرات را استقرار دهید.',
   'Click the add icon to start create your first model.':
@@ -345,6 +402,14 @@ export const faText: Record<string, string> = {
 
 const faPatterns: PatternTranslation[] = [
   {
+    pattern: /^(\d+) steps?$/i,
+    replace: ([, count]) => `${count} مرحله`,
+  },
+  {
+    pattern: /^(\d+)\/(\d+) Finished$/i,
+    replace: ([, current, total]) => `${current}/${total} تکمیل شده`,
+  },
+  {
     pattern: /^No (.+)$/i,
     replace: ([, item]) => `${item} وجود ندارد`,
   },
@@ -359,6 +424,10 @@ const faPatterns: PatternTranslation[] = [
   {
     pattern: /^Cache refreshes every (.+) at (.+)$/i,
     replace: ([, day, time]) => `کش هر ${day} ساعت ${time} بازخوانی می شود`,
+  },
+  {
+    pattern: /^Last refresh (.+)$/i,
+    replace: ([, time]) => `آخرین بازخوانی ${time}`,
   },
   {
     pattern: /^Are you sure you want to change to "(.+)" dataset\?$/i,
@@ -412,6 +481,17 @@ const skipSelector = [
   '[data-no-persianize]',
 ].join(',');
 
+const attributeSkipSelector = [
+  'script',
+  'style',
+  'code',
+  'pre',
+  '.ace_editor',
+  '.monaco-editor',
+  '.vega-embed',
+  '[data-no-persianize]',
+].join(',');
+
 const hasLatin = /[A-Za-z]/;
 
 function preserveOuterWhitespace(original: string, translated: string) {
@@ -437,12 +517,12 @@ export function translateFaText(value: string) {
   return value;
 }
 
-function shouldSkip(node: Node) {
+function shouldSkip(node: Node, selector = skipSelector) {
   const element =
     node.nodeType === Node.ELEMENT_NODE
       ? (node as Element)
       : node.parentElement;
-  return !!element?.closest(skipSelector);
+  return !!element?.closest(selector);
 }
 
 function translateTextNode(node: Text) {
@@ -452,7 +532,7 @@ function translateTextNode(node: Text) {
 }
 
 function translateElementAttributes(element: Element) {
-  if (shouldSkip(element)) return;
+  if (shouldSkip(element, attributeSkipSelector)) return;
   for (const attribute of attributes) {
     const value = element.getAttribute(attribute);
     if (!value) continue;

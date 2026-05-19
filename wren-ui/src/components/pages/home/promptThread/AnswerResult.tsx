@@ -35,14 +35,14 @@ import {
 const { Title, Text } = Typography;
 
 const adjustmentType = {
-  [ThreadResponseAdjustmentType.APPLY_SQL]: 'User-provided SQL applied',
-  [ThreadResponseAdjustmentType.REASONING]: 'Reasoning steps adjusted',
+  [ThreadResponseAdjustmentType.APPLY_SQL]: 'SQL وارد شده توسط کاربر اعمال شد',
+  [ThreadResponseAdjustmentType.REASONING]: 'مراحل استدلال تنظیم شد',
 };
 
 const knowledgeTooltip = (
   <>
-    Store this answer as a Question-SQL pair to help Wren AI improve SQL
-    generation.
+    این پاسخ را به عنوان جفت سوال و SQL ذخیره کنید تا تولید SQL در ورن AI بهتر
+    شود.
     <br />
     <Typography.Link
       className="gray-1 underline"
@@ -50,7 +50,7 @@ const knowledgeTooltip = (
       target="_blank"
       rel="noopener noreferrer"
     >
-      Learn more
+      بیشتر بدانید
     </Typography.Link>
   </>
 );
@@ -165,7 +165,7 @@ const AdjustmentInformation = (props: {
       <div className="d-flex align-center gx-2">
         <ShareAltOutlined className="gray-7" />
         <div className="flex-grow-1 gray-7">
-          Adjusted answer
+          پاسخ تنظیم شده
           <Tag className="gray-6 border border-gray-5 bg-gray-3 ml-3 text-medium">
             {adjustmentType[adjustment.type]}
           </Tag>
@@ -301,7 +301,7 @@ export default function AnswerResult(props: Props) {
                 tab={
                   <div className="select-none">
                     <CheckCircleFilled className="mr-2" />
-                    <Text>Answer</Text>
+                    <Text>پاسخ</Text>
                   </div>
                 }
               >
@@ -313,7 +313,7 @@ export default function AnswerResult(props: Props) {
               tab={
                 <div className="select-none">
                   <CodeFilled className="mr-2" />
-                  <Text>View SQL</Text>
+                  <Text>مشاهده SQL</Text>
                 </div>
               }
             >
@@ -325,7 +325,7 @@ export default function AnswerResult(props: Props) {
                 <div className="select-none">
                   <PieChartFilled className="mr-2" />
                   <Text>
-                    Chart<Tag className="adm-beta-tag">Beta</Tag>
+                    نمودار<Tag className="adm-beta-tag">آزمایشی</Tag>
                   </Text>
                 </div>
               }
@@ -356,7 +356,7 @@ export default function AnswerResult(props: Props) {
               >
                 <div className="d-flex align-center">
                   <RobotSVG className="mr-2" />
-                  Save to knowledge
+                  ذخیره در دانش
                 </div>
               </Button>
             </Tooltip>

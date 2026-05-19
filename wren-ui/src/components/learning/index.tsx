@@ -127,7 +127,7 @@ const getData = (
   const modeling = [
     {
       id: LEARNING.DATA_MODELING_GUIDE,
-      title: 'Data modeling guide',
+      title: 'راهنمای مدل سازی داده',
       onClick: () =>
         $guide?.current?.play(
           LEARNING.DATA_MODELING_GUIDE,
@@ -136,25 +136,25 @@ const getData = (
     },
     {
       id: LEARNING.CREATING_MODEL,
-      title: 'Creating a model',
+      title: 'ساخت مدل',
       href: 'https://docs.getwren.ai/oss/guide/modeling/models',
       onClick: () => saveRecord(LEARNING.CREATING_MODEL),
     },
     {
       id: LEARNING.CREATING_VIEW,
-      title: 'Creating a view',
+      title: 'ساخت نما',
       href: 'https://docs.getwren.ai/oss/guide/modeling/views',
       onClick: () => saveRecord(LEARNING.CREATING_VIEW),
     },
     {
       id: LEARNING.WORKING_RELATIONSHIP,
-      title: 'Working on relationship',
+      title: 'کار با رابطه ها',
       href: 'https://docs.getwren.ai/oss/guide/modeling/relationships',
       onClick: () => saveRecord(LEARNING.WORKING_RELATIONSHIP),
     },
     {
       id: LEARNING.CONNECT_OTHER_DATA_SOURCES,
-      title: 'Connect to other data sources',
+      title: 'اتصال به منابع داده دیگر',
       href: 'https://docs.getwren.ai/oss/guide/connect/overview',
       onClick: () => saveRecord(LEARNING.CONNECT_OTHER_DATA_SOURCES),
     },
@@ -163,7 +163,7 @@ const getData = (
   const home = [
     {
       id: LEARNING.SWITCH_PROJECT_LANGUAGE,
-      title: 'Switch the language',
+      title: 'تغییر زبان',
       onClick: () =>
         $guide?.current?.play(
           LEARNING.SWITCH_PROJECT_LANGUAGE,
@@ -172,7 +172,7 @@ const getData = (
     },
     {
       id: LEARNING.VIEW_FULL_SQL,
-      title: 'View full SQL',
+      title: 'مشاهده SQL کامل',
       href: 'https://docs.getwren.ai/oss/guide/home/answer#view-sqlview-full-sql',
       onClick: () => saveRecord(LEARNING.VIEW_FULL_SQL),
     },
@@ -337,7 +337,7 @@ export default function SidebarSection(_props: Props) {
           >
             <div className="flex-grow-1">
               <ReadOutlined className="mr-1" />
-              Learning
+              آموزش
             </div>
             <RightOutlined
               className="text-sm"
@@ -349,7 +349,7 @@ export default function SidebarSection(_props: Props) {
             <div className="px-4 py-2 d-flex align-center">
               <Progress total={total} current={current} />
               <span className="text-xs gray-6 text-nowrap pl-2">
-                {current}/{total} Finished
+                {current}/{total} تکمیل شده
               </span>
             </div>
           </CollapseBlock>

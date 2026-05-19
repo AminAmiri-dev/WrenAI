@@ -41,14 +41,28 @@ interface Attributes {
 
 const PromptStyle = styled.div`
   position: fixed;
-  width: 680px;
-  left: 50%;
-  margin-left: calc(-340px + 133px);
-  bottom: 18px;
+  width: min(760px, calc(100vw - 328px));
+  left: calc(280px + ((100vw - 280px) / 2));
+  bottom: 22px;
+  transform: translateX(-50%);
   z-index: 999;
+  padding: 10px 10px 10px 18px;
+  border-radius: 24px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: rgba(255, 255, 255, 0.98);
   box-shadow:
-    rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    rgba(15, 23, 42, 0.12) 0px 18px 45px -18px,
+    rgba(15, 23, 42, 0.08) 0px 4px 12px -6px;
+
+  @supports (backdrop-filter: blur(10px)) {
+    backdrop-filter: blur(10px);
+  }
+
+  @media (max-width: 780px) {
+    width: calc(100vw - 32px);
+    left: 50%;
+    bottom: 16px;
+  }
 `;
 
 export default forwardRef<Attributes, Props>(function Prompt(props, ref) {
@@ -155,7 +169,7 @@ export default forwardRef<Attributes, Props>(function Prompt(props, ref) {
   );
 
   return (
-    <PromptStyle className="d-flex align-end bg-gray-2 p-3 border border-gray-3 rounded">
+    <PromptStyle className="d-flex align-end">
       <PromptInput
         question={question}
         isProcessing={isProcessing}

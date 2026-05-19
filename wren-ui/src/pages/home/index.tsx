@@ -1,6 +1,7 @@
 import { ComponentRef, useMemo, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { Button, Typography } from 'antd';
+import styled from 'styled-components';
 import { Logo } from '@/components/Logo';
 import { Path } from '@/utils/enum';
 import SiderLayout from '@/components/layouts/SiderLayout';
@@ -20,18 +21,40 @@ import { CreateThreadInput } from '@/apollo/client/graphql/__types__';
 
 const { Text } = Typography;
 
+const HomeEmptyState = styled.div`
+  min-height: 100%;
+  padding: 48px 24px 148px;
+  text-align: center;
+
+  .adm-home-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    border: 1px solid var(--gray-4);
+    border-radius: 20px;
+    background: white;
+    box-shadow: rgba(15, 23, 42, 0.06) 0 12px 32px;
+  }
+
+  .adm-home-title {
+    margin-top: 18px;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--gray-9);
+  }
+`;
+
 const Wrapper = ({ children }) => {
   return (
-    <div
-      className="d-flex align-center justify-center flex-column"
-      style={{ height: '100%' }}
-    >
-      <Logo size={48} color="var(--gray-8)" />
-      <div className="text-md text-medium gray-8 mt-3">
-        Know more about your data
+    <HomeEmptyState className="d-flex align-center justify-center flex-column">
+      <div className="adm-home-logo">
+        <Logo size={46} color="var(--gray-8)" />
       </div>
+      <div className="adm-home-title">درباره داده هایتان سوال بپرسید</div>
       {children}
-    </div>
+    </HomeEmptyState>
   );
 };
 
@@ -73,14 +96,14 @@ function RecommendedQuestionsInstruction(props) {
       <Button className="mt-6" {...buttonProps} />
       {generating && (
         <Text className="mt-3 text-sm gray-6">
-          Thinking of good questions for you... (about 1 minute)
+          در حال آماده سازی سوال های مناسب برای شما... (حدود ۱ دقیقه)
         </Text>
       )}
       {!generating && showRetry && (
         <Text className="mt-3 text-sm gray-6 text-center">
-          We couldn't think of questions right now.
+          فعلا نتوانستیم سوال پیشنهادی آماده کنیم.
           <br />
-          Let's try again later.
+          کمی بعد دوباره امتحان کنید.
         </Text>
       )}
     </Wrapper>

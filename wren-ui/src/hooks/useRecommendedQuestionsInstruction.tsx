@@ -129,7 +129,7 @@ export default function useRecommendedQuestionsInstruction() {
       return {
         ...baseProps,
         icon: <ReloadOutlined />,
-        children: 'Regenerate',
+        children: 'تولید دوباره',
       };
     }
 
@@ -141,10 +141,10 @@ export default function useRecommendedQuestionsInstruction() {
         <Icon component={CopilotSVG} className="geekblue-6" />
       ),
       children: generating
-        ? 'Generating questions'
+        ? 'در حال تولید سوال ها'
         : showRetry
-          ? 'Retry'
-          : 'What could I ask?',
+          ? 'تلاش دوباره'
+          : 'چه سوالی می توانم بپرسم؟',
     };
   }, [generating, isRegenerate, showRetry, showRecommendedQuestionsPromptMode]);
 

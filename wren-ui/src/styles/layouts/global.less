@@ -37,6 +37,40 @@ html[dir='rtl'] {
   .ant-space {
     direction: inherit;
   }
+
+  .ant-btn > .anticon + span,
+  .ant-btn > span + .anticon,
+  .ant-dropdown-menu-title-content > .anticon + span,
+  .ant-menu-title-content > .anticon + span {
+    margin-left: 0;
+    margin-right: 8px;
+  }
+
+  .ant-tabs-tab .anticon + .ant-typography,
+  .ant-collapse-header .anticon + span,
+  .ant-alert-message .anticon + span {
+    margin-left: 0;
+    margin-right: 8px;
+  }
+}
+
+html[data-wren-path^='/modeling'] {
+  .adm-modeling-ltr,
+  .adm-modeling-ltr *,
+  .adm-modeling-sidebar-ltr,
+  .adm-modeling-sidebar-ltr .ant-tree,
+  .adm-modeling-sidebar-ltr .ant-tree *,
+  .ant-table,
+  .ant-transfer {
+    direction: ltr;
+  }
+
+  .adm-modeling-ltr,
+  .adm-modeling-sidebar-ltr,
+  .adm-modeling-sidebar-ltr .ant-tree,
+  .ant-table {
+    text-align: left;
+  }
 }
 
 @media (prefers-color-scheme: dark) {

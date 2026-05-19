@@ -211,7 +211,7 @@ export default function ChartAnswer(props: AnswerResultProps) {
   const regenerateBtn = (
     <div className="text-center mt-4">
       <Button icon={<ReloadOutlined />} onClick={onReload}>
-        Regenerate
+        تولید دوباره
       </Button>
     </div>
   );

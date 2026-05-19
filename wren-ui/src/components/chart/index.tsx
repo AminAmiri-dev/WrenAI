@@ -187,7 +187,7 @@ export default function Chart(props: VegaLiteProps) {
       {isAdditionalShow && (
         <div className="adm-chart-additional d-flex justify-content-between align-center">
           {!!onReload && (
-            <Tooltip title="Regenerate chart">
+            <Tooltip title="تولید دوباره نمودار">
               <button onClick={onReload}>
                 <ReloadOutlined />
               </button>

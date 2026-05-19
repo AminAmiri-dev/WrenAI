@@ -387,7 +387,7 @@ export default function Modeling() {
           onSelect,
         }}
       >
-        <DiagramWrapper>
+        <DiagramWrapper className="adm-modeling-ltr">
           <ForwardDiagram
             ref={diagramRef}
             data={diagramData}

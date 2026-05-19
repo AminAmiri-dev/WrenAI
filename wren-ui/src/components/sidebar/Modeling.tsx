@@ -28,7 +28,7 @@ export default function Modeling(props: Props) {
   const { models = [], views = [] } = data || {};
 
   return (
-    <>
+    <div className="adm-modeling-sidebar-ltr">
       <ModelTree
         models={models}
         onSelect={onSelect}
@@ -36,6 +36,6 @@ export default function Modeling(props: Props) {
         onOpenModelDrawer={onOpenModelDrawer}
       />
       <ViewTree views={views} onSelect={onSelect} selectedKeys={[]} />
-    </>
+    </div>
   );
 }

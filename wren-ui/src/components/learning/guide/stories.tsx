@@ -30,8 +30,8 @@ const RobotIcon = styled(RobotSVG)`
 
 const defaultConfigs: DriverConfig = {
   progressText: '{{current}} / {{total}}',
-  nextBtnText: 'Next',
-  prevBtnText: 'Previous',
+  nextBtnText: 'بعدی',
+  prevBtnText: 'قبلی',
   showButtons: ['next'],
   allowClose: false,
 };
@@ -92,34 +92,34 @@ const playDataModelingGuide = (
                 alt="data-modeling-guide"
               />
             </div>
-            Data modeling guide
+            راهنمای مدل سازی داده
           </div>,
         ),
         description: renderToString(
           <>
-            Data modeling adds a logical layer over your original data schema,
-            organizing relationships, semantics, and calculations. This helps AI
-            align with business logic, retrieve precise data, and generate
-            meaningful insights.{' '}
+            مدل سازی داده یک لایه منطقی روی schema اصلی داده شما ایجاد می کند و
+            رابطه ها، معناشناسی و محاسبات را منظم می سازد. این کار به AI کمک می
+            کند با منطق کسب وکار هماهنگ شود، داده دقیق را پیدا کند و بینش
+            معنادار بسازد.{' '}
             <a
               href="https://docs.getwren.ai/oss/guide/modeling/overview"
               target="_blank"
               rel="noopener noreferrer"
             >
-              More details
+              جزئیات بیشتر
             </a>
             <br />
             <br />
             {isSampleDataset ? (
               <>
-                We use {sampleDatasetInfo.label} Dataset to present the guide.
-                To know more, please visit{' '}
+                برای نمایش راهنما از دیتاست {sampleDatasetInfo.label} استفاده می
+                کنیم. برای اطلاعات بیشتر، اینجا را ببینید:{' '}
                 <a
                   href={sampleDatasetInfo.guide}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  about the {sampleDatasetInfo.label} Dataset.
+                  درباره دیتاست {sampleDatasetInfo.label}.
                 </a>
               </>
             ) : null}
@@ -143,11 +143,11 @@ const playDataModelingGuide = (
             <div className="mb-1">
               <ModelIcon style={{ fontSize: 24 }} />
             </div>
-            Create a model
+            ساخت مدل
           </>,
         ),
         description: renderToString(
-          <>Click the add icon to start create your first model.</>,
+          <>برای ساخت اولین مدل، روی آیکن افزودن کلیک کنید.</>,
         ),
       },
     },
@@ -163,11 +163,13 @@ const playDataModelingGuide = (
                 alt="edit-model"
               />
             </div>
-            Edit a model
+            ویرایش مدل
           </>,
         ),
         description: renderToString(
-          <>Click the more icon to update the columns of model or delete it.</>,
+          <>
+            برای به روزرسانی ستون های مدل یا حذف آن، روی آیکن بیشتر کلیک کنید.
+          </>,
         ),
       },
     },
@@ -183,14 +185,11 @@ const playDataModelingGuide = (
                 alt="edit-metadata"
               />
             </div>
-            Edit metadata
+            ویرایش فراداده
           </>,
         ),
         description: renderToString(
-          <>
-            You could edit alias (alternative name) and descriptions of models
-            and columns.
-          </>,
+          <>می توانید نام مستعار و توضیحات مدل ها و ستون ها را ویرایش کنید.</>,
         ),
         onPopoverRender: (popoverDom: DriverPopoverDOM) => {
           resetPopoverStyle(popoverDom, 360);
@@ -209,11 +208,11 @@ const playDataModelingGuide = (
                 alt="deploy-modeling"
               />
             </div>
-            Deploy modeling
+            استقرار مدل سازی
           </>,
         ),
         description: renderToString(
-          <>After editing the models, remember to deploy the changes.</>,
+          <>بعد از ویرایش مدل ها، فراموش نکنید تغییرات را مستقر کنید.</>,
         ),
       },
     },
@@ -228,19 +227,19 @@ const playDataModelingGuide = (
                 alt="ask-question"
               />
             </div>
-            Ask questions
+            پرسیدن سوال
           </>,
         ),
         description: renderToString(
           <>
-            When you finish editing your models, you can visit “Home” and start
-            asking questions.
+            وقتی ویرایش مدل ها تمام شد، به «خانه» بروید و سوال پرسیدن را شروع
+            کنید.
           </>,
         ),
         onPopoverRender: (popoverDom: DriverPopoverDOM) => {
           resetPopoverStyle(popoverDom, 720);
         },
-        doneBtnText: 'Go to Home',
+        doneBtnText: 'رفتن به خانه',
         onNextClick: () => {
           router.push(Path.Home);
           $driver.destroy();
@@ -265,7 +264,7 @@ const LanguageSwitcher = (props: { defaultValue: ProjectLanguage }) => {
 
   return (
     <>
-      <label className="d-block mb-2">Project language</label>
+      <label className="d-block mb-2">زبان پروژه</label>
       <Select
         showSearch
         style={{ width: '100%' }}
@@ -300,17 +299,17 @@ const playSwitchProjectLanguageGuide = (
             <div className="mb-1">
               <TranslateIcon style={{ fontSize: 24 }} />
             </div>
-            Switch the language
+            تغییر زبان
           </>,
         ),
         description: renderToString(
           <>
-            Choose your preferred language. Once set up, AI will respond in your
-            chosen language.
+            زبان دلخواهتان را انتخاب کنید. بعد از تنظیم، AI با همان زبان پاسخ می
+            دهد.
             <div className="my-3">
               <div id="projectLanguageContainer" />
             </div>
-            You can go to project settings to change it if you change your mind.
+            اگر بعدا نظرتان عوض شد، می توانید آن را از تنظیمات پروژه تغییر دهید.
           </>,
         ),
         onPopoverRender: (popoverDom: DriverPopoverDOM) => {
@@ -324,7 +323,7 @@ const playSwitchProjectLanguageGuide = (
           }
         },
         showButtons: ['next', 'close'],
-        nextBtnText: 'Submit',
+        nextBtnText: 'ثبت',
         onCloseClick: () => {
           $driver.destroy();
           window.sessionStorage.setItem('skipSwitchProjectLanguageGuide', '1');
@@ -392,15 +391,14 @@ const playKnowledgeGuide = (
                 alt="question-sql-pairs-guide"
               />
             </div>
-            Build knowledge base: Question-SQL pairs
+            ساخت پایگاه دانش: جفت های سوال و SQL
           </div>,
         ),
         description: renderToString(
           <>
-            Create and manage <b>Question-SQL pairs</b> to refine Wren AI’s SQL
-            generation. You can manually add pairs here or go to Home, ask a
-            question, and save the correct answer to Knowledge. The more you
-            save, the smarter Wren AI becomes!
+            برای بهبود تولید SQL در Wren AI، <b>جفت های سوال و SQL</b> بسازید و
+            مدیریت کنید. می توانید اینجا دستی جفت اضافه کنید یا به خانه بروید،
+            سوال بپرسید و پاسخ درست را در دانش ذخیره کنید.
           </>,
         ),
         onPopoverRender: (popoverDom: DriverPopoverDOM) => {
@@ -420,21 +418,21 @@ const playKnowledgeGuide = (
                 alt="instructions-guide"
               />
             </div>
-            Build knowledge base: Instructions
+            ساخت پایگاه دانش: دستورالعمل ها
           </div>,
         ),
         description: renderToString(
           <>
-            In addition to Question-SQL pairs, you can create instructions to
-            define <b>business rules</b> and <b>query logic</b>. These rules
-            guide Wren AI in applying consistent filters, constraints, and best
-            practices to SQL queries.
+            علاوه بر جفت های سوال و SQL، می توانید دستورالعمل هایی برای تعریف{' '}
+            <b>قوانین کسب وکار</b> و <b>منطق پرس وجو</b> بسازید. این قوانین به
+            Wren AI کمک می کنند فیلترها، محدودیت ها و بهترین روش ها را در پرس
+            وجوهای SQL یکدست اعمال کند.
           </>,
         ),
         onPopoverRender: (popoverDom: DriverPopoverDOM) => {
           resetPopoverStyle(popoverDom, 520);
         },
-        doneBtnText: 'Got it',
+        doneBtnText: 'متوجه شدم',
         onNextClick: () => {
           $driver.destroy();
           dispatcher?.onDone && dispatcher.onDone();
@@ -477,20 +475,20 @@ const playSaveToKnowledgeGuide = async (
             <div className="mb-1">
               <RobotIcon />
             </div>
-            Save to knowledge
+            ذخیره در دانش
           </>,
         ),
         description: renderToString(
           <>
-            If the AI-generated answer is correct, save it as a{' '}
-            <b>Question-SQL pair</b> to improve AI learning. If it's incorrect,
-            refine it with follow-ups before saving to ensure accuracy.
+            اگر پاسخ تولید شده توسط AI درست است، آن را به عنوان{' '}
+            <b>جفت سوال و SQL</b> ذخیره کنید تا یادگیری AI بهتر شود. اگر درست
+            نیست، قبل از ذخیره با سوال های تکمیلی اصلاحش کنید.
           </>,
         ),
         onPopoverRender: (popoverDom: DriverPopoverDOM) => {
           resetPopoverStyle(popoverDom, 360);
         },
-        doneBtnText: 'Got it',
+        doneBtnText: 'متوجه شدم',
         onNextClick: () => {
           $driver.destroy();
           dispatcher?.onDone && dispatcher.onDone();
