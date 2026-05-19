@@ -340,13 +340,25 @@ jobs:
           set_env WREN_UI_VERSION "$VERSION_TAG"
           set_env TELEMETRY_ENABLED false
           set_env AI_SERVICE_FORWARD_PORT 127.0.0.1:5555
+          set_env HOST_PORT 127.0.0.1:13000
 
           printf '%s' "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_ACTOR" --password-stdin
           docker compose --env-file .env -f docker-compose.yaml -f docker-compose.custom-images.yaml pull
           docker compose --env-file .env -f docker-compose.yaml -f docker-compose.custom-images.yaml up -d --remove-orphans
           docker compose --env-file .env -f docker-compose.yaml -f docker-compose.custom-images.yaml ps
           for attempt in $(seq 1 60); do
-            status="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 10 http://127.0.0.1:3000/ || true)"
+            status="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 10 http://127.0.0.1:13000/ || true)"
+            case "$status" in
+              2*|3*) break ;;
+              *) sleep 5 ;;
+            esac
+          done
+          if [ "${status:-000}" = "000" ] || ! printf '%s' "$status" | grep -Eq '^[23]'; then
+            docker compose --env-file .env -f docker-compose.yaml -f docker-compose.custom-images.yaml logs --tail 100 wren-ui wren-ai-service wren-engine ibis-server
+            exit 1
+          fi
+          for attempt in $(seq 1 60); do
+            status="$(curl -k -sS -o /dev/null -w '%{http_code}' --max-time 10 https://127.0.0.1:3000/ || true)"
             case "$status" in
               2*|3*) break ;;
               *) sleep 5 ;;
