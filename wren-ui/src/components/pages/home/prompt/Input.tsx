@@ -6,10 +6,10 @@ import { attachLoading } from '@/utils/helper';
 const InputShell = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   width: 100%;
   direction: ltr;
-  min-height: 46px;
+  min-height: 44px;
 `;
 
 const StyledTextArea = styled(Input.TextArea)`
@@ -43,9 +43,11 @@ const StyledTextArea = styled(Input.TextArea)`
 `;
 
 const PromptButton = styled(Button)`
-  width: 46px;
-  min-width: 46px;
-  height: 46px;
+  flex: 0 0 44px;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  min-height: 44px;
   border: 0;
   border-radius: 50%;
   display: inline-flex;
@@ -54,6 +56,8 @@ const PromptButton = styled(Button)`
   padding: 0;
   background: var(--gray-10);
   color: var(--gray-1);
+  line-height: 1;
+  overflow: hidden;
   box-shadow: rgba(15, 23, 42, 0.16) 0 8px 18px -10px;
 
   &:hover,
@@ -69,55 +73,32 @@ const PromptButton = styled(Button)`
     opacity: 0.76;
   }
 
-  .anticon {
-    font-size: 18px;
-  }
-
-  @media (max-width: 520px) {
-    width: 42px;
-    min-width: 42px;
-    height: 42px;
-  }
-`;
-
-const SendWaveIcon = styled.span`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  width: 22px;
-  height: 22px;
-
-  &::before,
-  &::after,
-  span {
-    content: '';
+  svg {
     display: block;
-    width: 3px;
-    border-radius: 999px;
-    background: currentColor;
-  }
-
-  &::before {
-    height: 9px;
-  }
-
-  span:nth-child(1) {
-    height: 15px;
-  }
-
-  span:nth-child(2) {
+    width: 20px;
     height: 20px;
   }
 
-  span:nth-child(3) {
-    height: 12px;
-  }
-
-  &::after {
-    height: 7px;
+  @media (max-width: 520px) {
+    flex-basis: 42px;
+    width: 42px;
+    min-width: 42px;
+    height: 42px;
+    min-height: 42px;
   }
 `;
+
+const SendWaveIcon = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <path
+      d="M4 10.5v3M8 7.75v8.5M12 5.5v13M16 8.5v7M20 10.75v2.5"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeWidth="2.7"
+    />
+  </svg>
+);
 
 interface Props {
   question: string;
@@ -186,11 +167,7 @@ export default function PromptInput(props: Props) {
         aria-label="پرسیدن"
         data-testid="dadeyar-prompt-send"
       >
-        <SendWaveIcon aria-hidden="true">
-          <span />
-          <span />
-          <span />
-        </SendWaveIcon>
+        <SendWaveIcon />
       </PromptButton>
     </InputShell>
   );

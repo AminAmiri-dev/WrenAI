@@ -46,11 +46,12 @@ const PromptStyle = styled.div`
   bottom: 24px;
   transform: translateX(-50%);
   z-index: 999;
-  padding: 5px 8px 5px 18px;
+  padding: 6px 8px 6px 18px;
   border-radius: 999px;
   border: 1px solid rgba(15, 23, 42, 0.16);
   background: #fff;
   direction: ltr;
+  overflow: hidden;
   box-shadow:
     rgba(15, 23, 42, 0.08) 0px 10px 22px -14px,
     rgba(15, 23, 42, 0.08) 0px 2px 7px -4px;

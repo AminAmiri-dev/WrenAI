@@ -23,6 +23,7 @@ export default function LogoBar() {
         height={28}
         priority
         unoptimized
+        style={{ objectFit: 'contain' }}
       />
       <span>داده یار</span>
     </Brand>

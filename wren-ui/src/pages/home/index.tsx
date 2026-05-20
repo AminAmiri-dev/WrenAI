@@ -30,12 +30,16 @@ const HomeEmptyState = styled.div`
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 72px;
-    height: 72px;
+    width: 64px;
+    height: 64px;
     border: 1px solid var(--gray-4);
-    border-radius: 20px;
+    border-radius: 18px;
     background: white;
     box-shadow: rgba(15, 23, 42, 0.06) 0 12px 32px;
+  }
+
+  .adm-home-logo img {
+    object-fit: contain;
   }
 
   .adm-home-title {
@@ -53,10 +57,11 @@ const Wrapper = ({ children }) => {
         <Image
           src="/images/SmallMenuIcon.png"
           alt="داده یار"
-          width={46}
-          height={46}
+          width={42}
+          height={42}
           priority
           unoptimized
+          style={{ objectFit: 'contain' }}
         />
       </div>
       <div className="adm-home-title">درباره داده هایتان سوال بپرسید</div>
