@@ -12,30 +12,41 @@ import LearningSection from '@/components/learning';
 const Layout = styled.div`
   position: relative;
   height: 100%;
-  background-color: var(--gray-2);
-  color: var(--gray-8);
-  padding-bottom: 12px;
+  background: #f7f7f5;
+  color: #353535;
+  padding: 10px 8px 12px;
   overflow-x: hidden;
+  border-left: 1px solid rgba(0, 0, 0, 0.06);
 `;
 
 const Content = styled.div`
   flex-grow: 1;
   overflow-y: auto;
+  padding: 2px 0 8px;
 `;
 
 const StyledButton = styled(Button)`
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 8px;
-  padding-left: 16px;
-  padding-right: 16px;
-  color: var(--gray-8) !important;
-  border-radius: 0;
+  height: 40px;
+  padding: 0 12px;
+  color: #4b4b4b !important;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
 
   &:hover,
   &:focus {
-    background-color: var(--gray-4);
+    background: #ececea;
+    color: #242424 !important;
+  }
+
+  .anticon {
+    color: #70706d;
+    font-size: 16px;
   }
 `;
 

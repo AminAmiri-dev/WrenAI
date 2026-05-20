@@ -134,15 +134,21 @@ export const createTreeGroupNode =
 
 export const GroupActionButton = styled(Button)`
   font-size: 12px;
-  height: auto;
-  background: transparent;
-  color: var(--gray-8);
+  height: 28px;
+  padding: 0 9px;
+  border-color: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background: #fff;
+  color: #3d3d3a;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
   &:hover {
-    background-color: transparent;
+    border-color: rgba(0, 0, 0, 0.16);
+    background-color: #f8f8f7;
+    color: #202020;
   }
   &:focus {
-    border-color: var(--gray-5);
-    background: transparent;
-    color: var(--gray-8);
+    border-color: rgba(0, 0, 0, 0.16);
+    background: #fff;
+    color: #202020;
   }
 `;

@@ -1,14 +1,71 @@
 :root {
   .make-color-variables();
   --disabled: @disabled-color;
+  --dadeyar-font: 'IRANSansWeb', Tahoma, Arial, sans-serif;
+}
+
+@font-face {
+  font-family: 'IRANSansWeb';
+  src: url('/fonts/iransans/IRANSansWeb.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IRANSansWeb';
+  src: url('/fonts/iransans/IRANSansWeb_Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IRANSansWeb';
+  src: url('/fonts/iransans/IRANSansWeb_Medium.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IRANSansWeb';
+  src: url('/fonts/iransans/IRANSansWeb_Bold.woff2') format('woff2');
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 body {
   min-width: 360px;
+  font-family: var(--dadeyar-font);
 }
 
-html[lang='fa'] body {
-  font-family: Tahoma, Arial, sans-serif;
+body,
+button,
+input,
+textarea,
+select,
+.ant-typography,
+.ant-btn,
+.ant-input,
+.ant-select,
+.ant-modal,
+.ant-dropdown,
+.ant-menu,
+.ant-table,
+.ant-tree {
+  font-family: var(--dadeyar-font) !important;
+}
+
+code,
+pre,
+.ace_editor,
+.ace_editor *,
+.monaco-editor,
+.monaco-editor * {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', monospace !important;
 }
 
 html[dir='rtl'] {

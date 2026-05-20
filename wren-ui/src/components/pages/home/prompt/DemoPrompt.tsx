@@ -5,19 +5,50 @@ import EllipsisWrapper from '@/components/EllipsisWrapper';
 
 const DemoBlock = styled.div`
   user-select: none;
+  position: relative;
   height: 150px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: rgba(15, 23, 42, 0.04) 0 8px 22px -14px;
+  overflow: hidden;
+  background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.98),
+      rgba(250, 250, 249, 0.98)
+    ),
+    #fff;
+  border-color: rgba(15, 23, 42, 0.1) !important;
+  border-radius: 16px !important;
+  box-shadow:
+    rgba(15, 23, 42, 0.05) 0 10px 24px -18px,
+    rgba(15, 23, 42, 0.04) 0 1px 0;
   transition:
     border-color ease 0.2s,
     box-shadow ease 0.2s,
     transform ease 0.2s;
 
+  .demo-label {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: 0 10px;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    border-radius: 999px;
+    background: #fff;
+    color: #555;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .demo-question {
+    color: #272727;
+    font-size: 13px;
+    line-height: 1.72;
+  }
+
   &:hover {
-    border-color: var(--geekblue-6) !important;
-    box-shadow: rgba(47, 84, 235, 0.14) 0 16px 34px -22px;
-    transform: translateY(-1px);
+    border-color: rgba(0, 0, 0, 0.22) !important;
+    box-shadow:
+      rgba(15, 23, 42, 0.08) 0 18px 38px -24px,
+      rgba(15, 23, 42, 0.06) 0 1px 0;
+    transform: translateY(-2px);
   }
 `;
 
@@ -34,9 +65,11 @@ const DemoTemplate = ({ label, question, onSelect }) => {
         onClick={() => onSelect({ label, question })}
       >
         <div className="d-flex justify-space-between align-center text-sm mb-3">
-          <div className="border border-gray-5 px-2 rounded-pill">{label}</div>
+          <div className="demo-label">{label}</div>
         </div>
-        <EllipsisWrapper multipleLine={4} text={question} />
+        <div className="demo-question">
+          <EllipsisWrapper multipleLine={4} text={question} />
+        </div>
       </DemoBlock>
     </Col>
   );

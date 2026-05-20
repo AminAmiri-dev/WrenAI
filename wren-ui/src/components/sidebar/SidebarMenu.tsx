@@ -6,12 +6,13 @@ const StyledMenu = styled(Menu)`
   &.ant-menu {
     background-color: transparent;
     border-right: 0;
-    color: var(--gray-8);
+    color: #3d3d3a;
+    padding: 2px 0;
 
     &:not(.ant-menu-horizontal) {
       .ant-menu-item-selected {
-        color: var(--gray-8);
-        background-color: var(--gray-5);
+        color: #202020;
+        background-color: #ececea;
       }
     }
 
@@ -25,14 +26,19 @@ const StyledMenu = styled(Menu)`
 
     .ant-menu-item-group-title {
       font-size: 12px;
-      font-weight: 700;
-      padding: 5px 16px;
+      font-weight: 600;
+      color: #7a7a75;
+      padding: 8px 12px 5px;
     }
 
     .ant-menu-item {
-      line-height: 28px;
+      min-height: 38px;
       height: auto;
-      margin: 0;
+      margin: 1px 0;
+      padding: 8px 12px !important;
+      border-radius: 10px;
+      line-height: 20px;
+      font-size: 13px;
       font-weight: 500;
 
       &:not(last-child) {
@@ -41,11 +47,11 @@ const StyledMenu = styled(Menu)`
 
       &:not(.ant-menu-item-disabled):hover {
         color: inherit;
-        background-color: var(--gray-4);
+        background-color: #efefed;
       }
 
       &:not(.ant-menu-item-disabled):active {
-        background-color: var(--gray-6);
+        background-color: #e6e6e3;
       }
 
       &:active {
@@ -53,14 +59,15 @@ const StyledMenu = styled(Menu)`
       }
 
       &-selected {
-        color: var(--gray-8);
+        color: #202020;
+        font-weight: 700;
 
         &:after {
           display: none;
         }
 
         &:hover {
-          color: var(--gray-8);
+          color: #202020;
         }
       }
     }

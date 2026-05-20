@@ -42,7 +42,7 @@ interface Attributes {
 const PromptStyle = styled.div`
   position: fixed;
   width: min(760px, calc(100vw - 32px));
-  left: 50%;
+  left: calc((100vw - 280px) / 2);
   bottom: 24px;
   transform: translateX(-50%);
   z-index: 999;
@@ -68,6 +68,7 @@ const PromptStyle = styled.div`
   }
 
   @media (max-width: 780px) {
+    left: 50%;
     width: calc(100vw - 32px);
     bottom: 16px;
   }

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Input, Button } from 'antd';
 import styled from 'styled-components';
+import ArrowUpOutlined from '@ant-design/icons/ArrowUpOutlined';
 import { attachLoading } from '@/utils/helper';
 
 const InputShell = styled.div`
@@ -88,18 +89,6 @@ const PromptButton = styled(Button)`
   }
 `;
 
-const SendWaveIcon = () => (
-  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-    <path
-      d="M4 10.5v3M8 7.75v8.5M12 5.5v13M16 8.5v7M20 10.75v2.5"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeWidth="2.7"
-    />
-  </svg>
-);
-
 interface Props {
   question: string;
   isProcessing: boolean;
@@ -167,7 +156,7 @@ export default function PromptInput(props: Props) {
         aria-label="پرسیدن"
         data-testid="dadeyar-prompt-send"
       >
-        <SendWaveIcon />
+        <ArrowUpOutlined />
       </PromptButton>
     </InputShell>
   );

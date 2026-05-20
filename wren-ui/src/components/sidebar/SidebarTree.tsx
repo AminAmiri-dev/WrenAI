@@ -6,17 +6,17 @@ import { Tree, TreeProps } from 'antd';
 const anticonStyle = css`
   [class^='anticon anticon-'] {
     transition: background-color ease-out 0.12s;
-    border-radius: 2px;
-    width: 12px;
-    height: 12px;
-    font-size: 12px;
+    border-radius: 6px;
+    width: 16px;
+    height: 16px;
+    font-size: 14px;
     vertical-align: middle;
 
     &:hover {
-      background-color: var(--gray-5);
+      background-color: rgba(0, 0, 0, 0.08);
     }
     &:active {
-      background-color: var(--gray-6);
+      background-color: rgba(0, 0, 0, 0.12);
     }
 
     &[disabled] {
@@ -36,17 +36,18 @@ const anticonStyle = css`
 const StyledTree = styled(Tree)`
   &.ant-tree {
     background-color: transparent;
-    color: var(--gray-8);
+    color: #3d3d3a;
+    font-size: 13px;
 
     .ant-tree-indent-unit {
-      width: 12px;
+      width: 10px;
     }
 
     .ant-tree-node-content-wrapper {
       display: flex;
       align-items: center;
-      line-height: 18px;
-      min-height: 28px;
+      line-height: 20px;
+      min-height: 36px;
       min-width: 1px;
       padding: 0;
     }
@@ -57,17 +58,21 @@ const StyledTree = styled(Tree)`
     }
 
     .ant-tree-treenode {
-      padding: 0 16px;
+      margin: 1px 0;
+      padding: 0 10px;
+      border-radius: 10px;
       background-color: transparent;
-      transition: background-color ease-out 0.12s;
+      transition:
+        background-color ease-out 0.14s,
+        color ease-out 0.14s;
 
       &-selected {
-        color: var(--geekblue-6);
-        background-color: var(--gray-4);
+        color: #202020;
+        background-color: #ececea;
       }
 
       .ant-tree-switcher {
-        width: 12px;
+        width: 14px;
         align-self: center;
         .ant-tree-switcher-icon {
           font-size: 12px;
@@ -90,10 +95,10 @@ const StyledTree = styled(Tree)`
 
       &-treeNode {
         &:hover {
-          background-color: var(--gray-4);
+          background-color: #efefed;
         }
         &:active {
-          background-color: var(--gray-6);
+          background-color: #e6e6e3;
         }
 
         .ant-tree-title {
@@ -108,11 +113,10 @@ const StyledTree = styled(Tree)`
         }
 
         &--group {
-          color: var(--gray-8);
-          margin-top: 16px;
-
-          font-size: 14px;
-          font-weight: 500;
+          color: #7a7a75;
+          margin-top: 14px;
+          font-size: 12px;
+          font-weight: 600;
 
           .ant-tree-switcher-noop {
             display: none;
@@ -124,7 +128,7 @@ const StyledTree = styled(Tree)`
         }
 
         &--empty {
-          color: var(--gray-7);
+          color: #969691;
           font-size: 12px;
           .ant-tree-switcher {
             display: none;
@@ -145,9 +149,9 @@ const StyledTree = styled(Tree)`
         }
 
         &--subtitle {
-          color: var(--gray-7);
+          color: #858580;
           font-size: 12px;
-          font-weight: 500;
+          font-weight: 600;
           .ant-tree-switcher {
             display: none;
           }
@@ -169,12 +173,13 @@ const StyledTree = styled(Tree)`
 
       &-actionIcon {
         font-size: 14px;
-        border-radius: 2px;
+        border-radius: 8px;
         margin-right: -3px;
+        color: #777772;
         &:not(.adm-actionIcon--disabled) {
           cursor: pointer;
           &:hover {
-            background-color: var(--gray-5);
+            background-color: rgba(0, 0, 0, 0.08);
           }
         }
         .anticon {
@@ -203,22 +208,37 @@ export const sidebarCommonStyle = css`
 `;
 
 export const StyledTreeNodeLink = styled(Link)`
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   cursor: pointer;
   user-select: none;
-  margin-top: 16px;
-  padding: 0 16px;
-  line-height: 28px;
-  color: var(--gray-8);
+  margin: 2px 0 10px;
+  padding: 8px 12px;
+  min-height: 38px;
+  border-radius: 10px;
+  color: #3d3d3a;
+  font-size: 13px;
+  font-weight: 500;
+  transition:
+    background-color 0.14s ease,
+    color 0.14s ease;
   &:hover {
-    background-color: var(--gray-4);
+    background-color: #efefed;
+    color: #202020;
   }
   &:active {
-    background-color: var(--gray-6);
+    background-color: #e6e6e3;
   }
   &.adm-treeNode--selected {
-    background-color: var(--gray-4);
-    color: var(--geekblue-6);
+    background-color: #ececea;
+    color: #202020;
+    font-weight: 700;
+  }
+
+  .anticon {
+    color: #6f6f6a;
+    font-size: 16px;
   }
 `;
 

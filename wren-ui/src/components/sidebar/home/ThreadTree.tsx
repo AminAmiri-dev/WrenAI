@@ -18,7 +18,7 @@ const StyledSidebarTree = styled(SidebarTree)`
 
   .adm-treeNode {
     &.adm-treeNode__thread {
-      padding: 0px 16px 0px 4px !important;
+      padding: 0 10px !important;
 
       .ant-tree-title {
         flex-grow: 1;
