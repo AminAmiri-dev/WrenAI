@@ -50,6 +50,29 @@ const DemoBlock = styled.div`
       rgba(15, 23, 42, 0.06) 0 1px 0;
     transform: translateY(-2px);
   }
+
+  @media (max-width: 640px) {
+    height: auto;
+    min-height: 116px;
+  }
+`;
+
+const DemoPromptWrap = styled.div`
+  width: 580px;
+  max-width: 100%;
+
+  @media (max-width: 640px) {
+    width: min(280px, calc(100vw - 48px));
+
+    .ant-row {
+      row-gap: 10px;
+    }
+
+    .ant-col {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
 `;
 
 interface Props {
@@ -80,13 +103,13 @@ const DemoColumnIterator = makeIterable(DemoTemplate);
 export default function DemoPrompt(props: Props) {
   const { demo, onSelect } = props;
   return (
-    <div className="gray-8" style={{ width: 580, maxWidth: '100%' }}>
+    <DemoPromptWrap className="gray-8">
       <div className="text-center mt-3 mb-3 gray-7">
         این سوال ها را امتحان کنید...
       </div>
       <Row gutter={16}>
         <DemoColumnIterator data={demo} onSelect={onSelect} />
       </Row>
-    </div>
+    </DemoPromptWrap>
   );
 }

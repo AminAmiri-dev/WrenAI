@@ -20,6 +20,10 @@ const StyledContentLayout = styled(Layout)<{ color?: string }>`
 
 const StyledSider = styled(Sider)`
   ${basicStyle}
+
+  @media (max-width: 780px) {
+    display: none;
+  }
 `;
 
 type Props = React.ComponentProps<typeof SimpleLayout> & {
