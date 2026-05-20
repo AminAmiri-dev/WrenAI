@@ -172,15 +172,15 @@ export default function APIHistory() {
         description={
           <>
             <div>
-              Here you can view the full history of API calls, including request
-              inputs, responses, and execution details.{' '}
+              در این بخش می توانید تاریخچه کامل فراخوانی های API، شامل ورودی
+              درخواست ها، پاسخ ها و جزئیات اجرا را ببینید.{' '}
               <Link
                 className="gray-8 underline mr-2"
                 href="https://docs.getwren.ai/oss/guide/api-access/history"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Learn more.
+                بیشتر بدانید.
               </Link>
             </div>
           </>

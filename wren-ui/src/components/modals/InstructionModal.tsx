@@ -94,22 +94,18 @@ export default function InstructionModal(props: Props) {
           ]}
           extra={
             <>
-              Choose whether this instruction applies to{' '}
-              <span className="gray-7">all queries</span> or{' '}
+              مشخص کنید این دستورالعمل برای{' '}
+              <span className="gray-7">همه پرس وجوها</span> اعمال شود یا{' '}
               <span className="gray-7">
-                only when similar user questions are detected
+                فقط وقتی سوال مشابهی از کاربر شناسایی شد
               </span>
               .
             </>
           }
         >
           <Radio.Group>
-            <Radio.Button value={true}>
-              Global (applies to all questions)
-            </Radio.Button>
-            <Radio.Button value={false}>
-              Matched to specific questions
-            </Radio.Button>
+            <Radio.Button value={true}>سراسری (برای همه سوال ها)</Radio.Button>
+            <Radio.Button value={false}>متصل به سوال های مشخص</Radio.Button>
           </Radio.Group>
         </Form.Item>
         {!isDefault && (

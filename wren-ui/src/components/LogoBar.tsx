@@ -1,10 +1,10 @@
+import Image from 'next/image';
 import styled from 'styled-components';
-import { Logo } from '@/components/Logo';
 
 const Brand = styled.div`
   display: inline-flex;
   align-items: center;
-  gap: 9px;
+  gap: 10px;
   color: var(--gray-1);
   font-size: 17px;
   font-weight: 800;
@@ -16,7 +16,13 @@ const Brand = styled.div`
 export default function LogoBar() {
   return (
     <Brand aria-label="داده یار">
-      <Logo size={27} color="currentColor" />
+      <Image
+        src="/images/SmallMenuIcon.png"
+        alt="داده یار"
+        width={28}
+        height={28}
+        priority
+      />
       <span>داده یار</span>
     </Brand>
   );

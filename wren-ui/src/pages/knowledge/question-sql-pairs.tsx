@@ -130,7 +130,7 @@ export default function ManageQuestionSQLPairs() {
         title={
           <>
             <FunctionOutlined className="mr-2 gray-8" />
-            Manage question-SQL pairs
+            مدیریت جفت های سوال و SQL
           </>
         }
         titleExtra={

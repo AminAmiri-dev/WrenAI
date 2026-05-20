@@ -41,35 +41,33 @@ interface Attributes {
 
 const PromptStyle = styled.div`
   position: fixed;
-  width: min(920px, calc(100vw - 360px));
-  left: calc(280px + ((100vw - 280px) / 2));
-  bottom: 20px;
+  width: min(760px, calc(100vw - 32px));
+  left: 50%;
+  bottom: 24px;
   transform: translateX(-50%);
   z-index: 999;
-  padding: 8px 10px;
-  border-radius: 30px;
-  border: 1px solid rgba(15, 23, 42, 0.14);
-  background: rgba(255, 255, 255, 0.99);
-  direction: rtl;
+  padding: 6px 8px 6px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.16);
+  background: #fff;
+  direction: ltr;
   box-shadow:
-    rgba(15, 23, 42, 0.14) 0px 20px 46px -20px,
-    rgba(15, 23, 42, 0.1) 0px 8px 18px -12px;
+    rgba(15, 23, 42, 0.08) 0px 10px 22px -14px,
+    rgba(15, 23, 42, 0.08) 0px 2px 7px -4px;
 
   @supports (backdrop-filter: blur(10px)) {
     backdrop-filter: blur(10px);
   }
 
   &:focus-within {
-    border-color: rgba(47, 84, 235, 0.38);
+    border-color: rgba(15, 23, 42, 0.22);
     box-shadow:
-      rgba(47, 84, 235, 0.16) 0px 0px 0px 3px,
-      rgba(15, 23, 42, 0.14) 0px 20px 46px -20px,
-      rgba(15, 23, 42, 0.1) 0px 8px 18px -12px;
+      rgba(15, 23, 42, 0.1) 0px 12px 26px -16px,
+      rgba(15, 23, 42, 0.1) 0px 3px 9px -5px;
   }
 
   @media (max-width: 780px) {
     width: calc(100vw - 32px);
-    left: 50%;
     bottom: 16px;
   }
 `;

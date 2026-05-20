@@ -85,7 +85,7 @@ export default function EditModelMetadata(props: Props) {
 
       <div className="mb-6">
         <Typography.Text className="d-block gray-7 mb-2">
-          Columns ({fields.length})
+          ستون ها ({fields.length})
         </Typography.Text>
         <FieldEditableTable
           dataSource={fields}
@@ -137,7 +137,7 @@ export default function EditModelMetadata(props: Props) {
       {!!relationFields.length && (
         <div className="mb-6">
           <Typography.Text className="d-block gray-7 mb-2">
-            Relationships ({relationFields.length})
+            رابطه ها ({relationFields.length})
           </Typography.Text>
           <RelationshipEditableTable
             dataSource={relationFields}

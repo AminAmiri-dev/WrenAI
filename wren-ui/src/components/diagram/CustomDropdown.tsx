@@ -66,7 +66,7 @@ export const ModelDropdown = makeDropdown((props: Props) => {
       label: (
         <>
           <EditOutlined className="mr-2" />
-          Update Columns
+          به روزرسانی ستون ها
         </>
       ),
       key: MORE_ACTION.UPDATE_COLUMNS,
@@ -115,7 +115,7 @@ export const ColumnDropdown = makeDropdown((props: Props) => {
       label: (
         <>
           <EditOutlined className="mr-2" />
-          Edit
+          ویرایش
         </>
       ),
       key: MORE_ACTION.EDIT,
@@ -215,7 +215,7 @@ export const SQLPairDropdown = makeDropdown(
         label: (
           <>
             <EyeOutlined className="mr-2" />
-            View
+            مشاهده
           </>
         ),
         key: MORE_ACTION.VIEW_SQL_PAIR,
@@ -229,7 +229,7 @@ export const SQLPairDropdown = makeDropdown(
         label: (
           <>
             <EditOutlined className="mr-2" />
-            Edit
+            ویرایش
           </>
         ),
         key: MORE_ACTION.EDIT,
@@ -274,7 +274,7 @@ export const InstructionDropdown = makeDropdown(
         label: (
           <>
             <EyeOutlined className="mr-2" />
-            View
+            مشاهده
           </>
         ),
         key: MORE_ACTION.VIEW_INSTRUCTION,
@@ -288,7 +288,7 @@ export const InstructionDropdown = makeDropdown(
         label: (
           <>
             <EditOutlined className="mr-2" />
-            Edit
+            ویرایش
           </>
         ),
         key: MORE_ACTION.EDIT,

@@ -184,14 +184,14 @@ export default function AdjustSQLModal(props: Props) {
       </Form>
       <div className="my-3">
         <Typography.Text className="d-block gray-7 mb-2">
-          Data preview (50 rows)
+          پیش نمایش داده (۵۰ ردیف)
         </Typography.Text>
         <Button
           onClick={onPreviewData}
           loading={previewing}
           disabled={disabled}
         >
-          Preview data
+          پیش نمایش داده
         </Button>
         {showPreview && (
           <div className="my-3">

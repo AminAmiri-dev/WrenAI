@@ -137,7 +137,7 @@ export default function AddCalculatedFieldModal(props: Props) {
 
   return (
     <Modal
-      title={`${isEditMode ? 'Update' : 'Add'} calculated field`}
+      title={isEditMode ? 'به روزرسانی فیلد محاسباتی' : 'افزودن فیلد محاسباتی'}
       width={750}
       visible={visible}
       onCancel={onClose}
@@ -155,7 +155,7 @@ export default function AddCalculatedFieldModal(props: Props) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              How to set primary key in a model.
+              روش تنظیم کلید اصلی در مدل
             </Typography.Link>
           </div>
           <div>

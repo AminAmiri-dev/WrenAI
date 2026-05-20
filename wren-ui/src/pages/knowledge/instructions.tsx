@@ -171,7 +171,7 @@ export default function ManageInstructions() {
         title={
           <>
             <StyledInstructionsIcon className="mr-2 gray-8" />
-            Manage instruction
+            مدیریت دستورالعمل ها
           </>
         }
         titleExtra={

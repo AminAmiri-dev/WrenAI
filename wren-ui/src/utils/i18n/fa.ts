@@ -32,6 +32,7 @@ export const faText: Record<string, string> = {
   'One-to-many': 'یک به چند',
   'One-to-one': 'یک به یک',
   'Primary Key': 'کلید اصلی',
+  Ranking: 'رتبه بندی',
 
   Cancel: 'لغو',
   Confirm: 'تایید',
@@ -39,6 +40,7 @@ export const faText: Record<string, string> = {
   Save: 'ذخیره',
   Delete: 'حذف',
   Change: 'تغییر',
+  Edit: 'ویرایش',
   Reset: 'بازنشانی',
   Convert: 'تبدیل',
   'Are you sure?': 'مطمئن هستید؟',
@@ -115,7 +117,9 @@ export const faText: Record<string, string> = {
   'Sorry, we couldn': 'متاسفانه نتوانستیم',
 
   'Question-SQL pairs': 'جفت های سوال و SQL',
+  'Manage question-SQL pairs': 'مدیریت جفت های سوال و SQL',
   Instructions: 'دستورالعمل ها',
+  'Manage instruction': 'مدیریت دستورالعمل ها',
   'Question-SQL pair': 'جفت سوال و SQL',
   'Add question-SQL pair': 'افزودن جفت سوال و SQL',
   'Add an instruction': 'افزودن دستورالعمل',
@@ -126,6 +130,12 @@ export const faText: Record<string, string> = {
   'SQL Statement': 'عبارت SQL',
   'Created time': 'زمان ایجاد',
   Global: 'سراسری',
+  'Global (applies to all questions)': 'سراسری (برای همه سوال ها)',
+  'Matched to specific questions': 'متصل به سوال های مشخص',
+  'Choose whether this instruction applies to':
+    'مشخص کنید این دستورالعمل اعمال شود روی',
+  'only when similar user questions are detected':
+    'فقط وقتی سوال مشابهی از کاربر شناسایی شد',
   'Instruction details': 'جزئیات دستورالعمل',
   'Matching questions': 'سوال های مرتبط',
   'Apply instruction to': 'اعمال دستورالعمل روی',
@@ -149,6 +159,8 @@ export const faText: Record<string, string> = {
   'Duration (ms)': 'مدت زمان (میلی ثانیه)',
   'Here you can view the full history of API calls, including request':
     'اینجا می توانید تاریخچه کامل فراخوانی های API، شامل درخواست را ببینید',
+  'Here you can view the full history of API calls, including request inputs, responses, and execution details. Learn more.':
+    'در این بخش می توانید تاریخچه کامل فراخوانی های API، شامل ورودی درخواست ها، پاسخ ها و جزئیات اجرا را ببینید. بیشتر بدانید.',
 
   Deploy: 'استقرار',
   'Deploying...': 'در حال استقرار...',
@@ -178,6 +190,7 @@ export const faText: Record<string, string> = {
   Models: 'مدل ها',
   Views: 'نماها',
   Columns: 'ستون ها',
+  'Update Columns': 'به روزرسانی ستون ها',
   'Column Name': 'نام ستون',
   'Column Type': 'نوع ستون',
   'Table name': 'نام جدول',
@@ -197,6 +210,10 @@ export const faText: Record<string, string> = {
   'No data': 'داده ای وجود ندارد',
   'Search here': 'اینجا جست وجو کنید',
   'How to create a View?': 'چطور یک نما بسازیم؟',
+  'Create a data model': 'ساخت مدل داده',
+  'Update relationship': 'به روزرسانی رابطه',
+  'Add calculated field': 'افزودن فیلد محاسباتی',
+  'How to set primary key in a model.': 'روش تنظیم کلید اصلی در مدل',
 
   'Save as View': 'ذخیره به عنوان نما',
   'Adjust SQL': 'تنظیم SQL',
@@ -217,6 +234,10 @@ export const faText: Record<string, string> = {
   "Sorry, we couldn't find any records that match your search criteria.":
     'متاسفانه رکوردی مطابق معیارهای جست وجوی شما پیدا نشد.',
   'Show top 25': 'نمایش ۲۵ مورد برتر',
+  'There are too many categories to display effectively. Click':
+    'تعداد دسته ها برای نمایش موثر زیاد است. کلیک کنید',
+  "There are too many categories to display effectively. Click 'Show top 25' to view the top results, or ask a follow-up question to focus on a specific group or filter results.":
+    'تعداد دسته ها برای نمایش موثر زیاد است. برای دیدن نتایج برتر روی «نمایش ۲۵ مورد برتر» کلیک کنید یا با یک سوال تکمیلی روی گروه مشخصی تمرکز کنید و نتایج را فیلتر کنید.',
 
   'Cache settings': 'تنظیمات کش',
   'Refresh settings': 'تنظیمات بازخوانی',
@@ -248,6 +269,14 @@ export const faText: Record<string, string> = {
   'Select stack groups': 'گروه های پشته ای را انتخاب کنید',
   'Line groups': 'گروه های خطی',
   'Select line groups': 'گروه های خطی را انتخاب کنید',
+  'Data preview (100 rows)': 'پیش نمایش داده (۱۰۰ ردیف)',
+  'Data preview (50 rows)': 'پیش نمایش داده (۵۰ ردیف)',
+  'Preview data': 'پیش نمایش داده',
+  'Let AI create a matching question for this SQL statement.':
+    'اجازه دهید هوش مصنوعی برای این SQL یک سوال متناسب بسازد.',
+  'Retrieving top 10 model candidates': 'در حال بازیابی ۱۰ مدل کاندید برتر',
+  'Organizing thoughts': 'در حال سامان دهی استدلال',
+  'Generating SQL statement': 'در حال تولید عبارت SQL',
 
   'Data modeling guide': 'راهنمای مدل سازی داده',
   'Creating a model': 'ساخت مدل',
@@ -404,6 +433,26 @@ const faPatterns: PatternTranslation[] = [
   {
     pattern: /^(\d+) steps?$/i,
     replace: ([, count]) => `${count} مرحله`,
+  },
+  {
+    pattern: /^Columns \((\d+)\)$/i,
+    replace: ([, count]) => `ستون ها (${count})`,
+  },
+  {
+    pattern: /^Relationships \((\d+)\)$/i,
+    replace: ([, count]) => `رابطه ها (${count})`,
+  },
+  {
+    pattern: /^Data preview \((\d+) rows\)$/i,
+    replace: ([, count]) => `پیش نمایش داده (${count} ردیف)`,
+  },
+  {
+    pattern: /^Top (\d+) model candidates identified$/i,
+    replace: ([, count]) => `${count} مدل کاندید برتر شناسایی شد`,
+  },
+  {
+    pattern: /^(\d+) models applied$/i,
+    replace: ([, count]) => `${count} مدل اعمال شد`,
   },
   {
     pattern: /^(\d+)\/(\d+) Finished$/i,

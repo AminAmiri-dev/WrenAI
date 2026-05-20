@@ -249,7 +249,7 @@ export default function QuestionSQLPairModal(props: Props) {
               >
                 <span>Question</span>
                 <div className="gray-8 text-sm">
-                  Let AI create a matching question for this SQL statement.
+                  اجازه دهید هوش مصنوعی برای این SQL یک سوال متناسب بسازد.
                   <Button
                     className="ml-2"
                     size="small"
@@ -305,14 +305,14 @@ export default function QuestionSQLPairModal(props: Props) {
         </StyledForm>
         <div className="my-3">
           <Typography.Text className="d-block gray-7 mb-2">
-            Data preview (50 rows)
+            پیش نمایش داده (۵۰ ردیف)
           </Typography.Text>
           <Button
             onClick={onPreviewData}
             loading={previewing}
             disabled={disabled}
           >
-            Preview data
+            پیش نمایش داده
           </Button>
           {showPreview && (
             <div className="my-3">

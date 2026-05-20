@@ -95,7 +95,7 @@ export default function RelationModal(props: Props) {
 
   return (
     <Modal
-      title={`${isEmpty(defaultValue) ? 'Add' : 'Update'} relationship`}
+      title={isEmpty(defaultValue) ? 'افزودن رابطه' : 'به روزرسانی رابطه'}
       width={750}
       visible={visible}
       okText="Submit"

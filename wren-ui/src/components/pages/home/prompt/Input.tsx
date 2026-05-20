@@ -1,9 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Input, Button } from 'antd';
 import styled from 'styled-components';
-import ArrowUpOutlined from '@ant-design/icons/ArrowUpOutlined';
-import DownOutlined from '@ant-design/icons/DownOutlined';
-import PlusOutlined from '@ant-design/icons/PlusOutlined';
 import { attachLoading } from '@/utils/helper';
 
 const InputShell = styled.div`
@@ -11,13 +8,13 @@ const InputShell = styled.div`
   align-items: center;
   gap: 8px;
   width: 100%;
-  direction: rtl;
-  min-height: 50px;
+  direction: ltr;
+  min-height: 52px;
 `;
 
 const StyledTextArea = styled(Input.TextArea)`
   flex: 1;
-  padding: 10px 2px;
+  padding: 10px 6px 10px 4px;
   border: 0;
   border-radius: 0;
   background: transparent;
@@ -26,6 +23,7 @@ const StyledTextArea = styled(Input.TextArea)`
   font-size: 15px;
   line-height: 1.7;
   resize: none;
+  direction: rtl;
   text-align: right;
 
   &.ant-input {
@@ -44,73 +42,10 @@ const StyledTextArea = styled(Input.TextArea)`
   }
 `;
 
-const UtilityButton = styled(Button)`
-  width: 38px;
-  min-width: 38px;
-  height: 38px;
-  border: none;
-  border-radius: 50%;
-  color: var(--gray-8);
-  background: transparent;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-
-  &:hover,
-  &:focus {
-    color: var(--gray-10);
-    background: var(--gray-3);
-  }
-
-  .anticon {
-    font-size: 17px;
-  }
-
-  @media (max-width: 520px) {
-    width: 34px;
-    min-width: 34px;
-    height: 34px;
-  }
-`;
-
-const InputActions = styled.div`
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  flex: none;
-`;
-
-const ModeButton = styled(Button)`
-  height: 36px;
-  padding: 0 10px;
-  border: 0;
-  color: var(--gray-7);
-  background: transparent;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-
-  &:hover,
-  &:focus {
-    color: var(--gray-9);
-    background: var(--gray-3);
-  }
-
-  .anticon {
-    font-size: 10px;
-  }
-
-  @media (max-width: 520px) {
-    display: none;
-  }
-`;
-
 const PromptButton = styled(Button)`
-  width: 40px;
-  min-width: 40px;
-  height: 40px;
+  width: 46px;
+  min-width: 46px;
+  height: 46px;
   border: 0;
   border-radius: 50%;
   display: inline-flex;
@@ -139,9 +74,48 @@ const PromptButton = styled(Button)`
   }
 
   @media (max-width: 520px) {
-    width: 38px;
-    min-width: 38px;
-    height: 38px;
+    width: 42px;
+    min-width: 42px;
+    height: 42px;
+  }
+`;
+
+const SendWaveIcon = styled.span`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 22px;
+  height: 22px;
+
+  &::before,
+  &::after,
+  span {
+    content: '';
+    display: block;
+    width: 3px;
+    border-radius: 999px;
+    background: currentColor;
+  }
+
+  &::before {
+    height: 9px;
+  }
+
+  span:nth-child(1) {
+    height: 15px;
+  }
+
+  span:nth-child(2) {
+    height: 20px;
+  }
+
+  span:nth-child(3) {
+    height: 12px;
+  }
+
+  &::after {
+    height: 7px;
   }
 `;
 
@@ -192,12 +166,6 @@ export default function PromptInput(props: Props) {
 
   return (
     <InputShell>
-      <UtilityButton
-        type="text"
-        icon={<PlusOutlined />}
-        onClick={() => $promptInput.current?.focus()}
-        aria-label="افزودن"
-      />
       <StyledTextArea
         ref={$promptInput}
         // disable grammarly
@@ -210,20 +178,19 @@ export default function PromptInput(props: Props) {
         disabled={isDisabled}
         {...inputProps}
       />
-      <InputActions>
-        <ModeButton type="text" onClick={() => $promptInput.current?.focus()}>
-          تفکر
-          <DownOutlined />
-        </ModeButton>
-        <PromptButton
-          type="primary"
-          size="large"
-          icon={<ArrowUpOutlined />}
-          onClick={handleAsk}
-          disabled={isDisabled}
-          aria-label="پرسیدن"
-        />
-      </InputActions>
+      <PromptButton
+        type="primary"
+        size="large"
+        onClick={handleAsk}
+        disabled={isDisabled}
+        aria-label="پرسیدن"
+      >
+        <SendWaveIcon aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </SendWaveIcon>
+      </PromptButton>
     </InputShell>
   );
 }

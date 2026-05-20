@@ -66,7 +66,7 @@ export default function ModelMetadata(props: Props) {
 
       <div className="mb-6" data-testid="metadata__columns">
         <Typography.Text className="d-block gray-7 mb-2">
-          Columns ({fields.length})
+          ستون ها ({fields.length})
         </Typography.Text>
         <FieldTable dataSource={fields} showExpandable />
       </div>
@@ -74,7 +74,7 @@ export default function ModelMetadata(props: Props) {
       {!!calculatedFields.length && (
         <div className="mb-6" data-testid="metadata__calculated-fields">
           <Typography.Text className="d-block gray-7 mb-2">
-            Calculated fields ({calculatedFields.length})
+            فیلدهای محاسباتی ({calculatedFields.length})
           </Typography.Text>
           <CalculatedFieldTable dataSource={calculatedFields} showExpandable />
         </div>
@@ -83,7 +83,7 @@ export default function ModelMetadata(props: Props) {
       {!!relationFields.length && (
         <div className="mb-6" data-testid="metadata__relationships">
           <Typography.Text className="d-block gray-7 mb-2">
-            Relationships ({relationFields.length})
+            رابطه ها ({relationFields.length})
           </Typography.Text>
           <RelationTable dataSource={relationFields} showExpandable />
         </div>
@@ -91,13 +91,13 @@ export default function ModelMetadata(props: Props) {
 
       <div className="mb-6" data-testid="metadata__preview-data">
         <Typography.Text className="d-block gray-7 mb-2">
-          Data preview (100 rows)
+          پیش نمایش داده (۱۰۰ ردیف)
         </Typography.Text>
         <Button
           onClick={onPreviewData}
           loading={previewModelDataResult.loading}
         >
-          Preview data
+          پیش نمایش داده
         </Button>
         <div className="my-3">
           <PreviewData

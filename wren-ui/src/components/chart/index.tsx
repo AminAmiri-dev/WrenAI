@@ -152,16 +152,16 @@ export default function Chart(props: VegaLiteProps) {
           message={
             <div className="d-flex align-center justify-space-between">
               <div>
-                There are too many categories to display effectively. Click
-                'Show top 25' to view the top results, or ask a follow-up
-                question to focus on a specific group or filter results.
+                تعداد دسته ها برای نمایش موثر زیاد است. برای دیدن نتایج برتر روی
+                «نمایش ۲۵ مورد برتر» کلیک کنید یا با یک سوال تکمیلی روی گروه
+                مشخصی تمرکز کنید و نتایج را فیلتر کنید.
               </div>
               <Button
                 size="small"
                 icon={<EyeOutlined />}
                 onClick={onShowTopCategories}
               >
-                Show top 25
+                نمایش ۲۵ مورد برتر
               </Button>
             </div>
           }
@@ -194,14 +194,14 @@ export default function Chart(props: VegaLiteProps) {
             </Tooltip>
           )}
           {!!onEdit && (
-            <Tooltip title="Edit chart">
+            <Tooltip title="ویرایش نمودار">
               <button onClick={onEdit}>
                 <EditOutlined />
               </button>
             </Tooltip>
           )}
           {!!onPin && (
-            <Tooltip title="Pin chart to dashboard">
+            <Tooltip title="سنجاق نمودار به داشبورد">
               <button onClick={onPin}>
                 <PushPinOutlined />
               </button>

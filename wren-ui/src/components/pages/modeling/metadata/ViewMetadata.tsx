@@ -42,7 +42,7 @@ export default function ViewMetadata(props: Props) {
 
       <div className="mb-6" data-testid="metadata__columns">
         <Typography.Text className="d-block gray-7 mb-2">
-          Columns ({fields.length})
+          ستون ها ({fields.length})
         </Typography.Text>
         <FieldTable
           columns={[COLUMN.NAME, COLUMN.TYPE, COLUMN.DESCRIPTION]}
@@ -60,10 +60,10 @@ export default function ViewMetadata(props: Props) {
 
       <div className="mb-6" data-testid="metadata__preview-data">
         <Typography.Text className="d-block gray-7 mb-2">
-          Data preview (100 rows)
+          پیش نمایش داده (۱۰۰ ردیف)
         </Typography.Text>
         <Button onClick={onPreviewData} loading={previewViewDataResult.loading}>
-          Preview data
+          پیش نمایش داده
         </Button>
         <div className="my-3">
           <PreviewData

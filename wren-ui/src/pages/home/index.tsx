@@ -1,8 +1,8 @@
 import { ComponentRef, useMemo, useRef } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import { Button, Typography } from 'antd';
 import styled from 'styled-components';
-import { Logo } from '@/components/Logo';
 import { Path } from '@/utils/enum';
 import SiderLayout from '@/components/layouts/SiderLayout';
 import Prompt from '@/components/pages/home/prompt';
@@ -50,7 +50,13 @@ const Wrapper = ({ children }) => {
   return (
     <HomeEmptyState className="d-flex align-center justify-center flex-column">
       <div className="adm-home-logo">
-        <Logo size={46} color="var(--gray-8)" />
+        <Image
+          src="/images/SmallMenuIcon.png"
+          alt="داده یار"
+          width={46}
+          height={46}
+          priority
+        />
       </div>
       <div className="adm-home-title">درباره داده هایتان سوال بپرسید</div>
       {children}

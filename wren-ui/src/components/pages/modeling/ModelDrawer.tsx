@@ -9,7 +9,7 @@ type Props = DrawerAction & {
 
 const getDrawerTitle = (formMode: FORM_MODE, name?: string) =>
   ({
-    [FORM_MODE.CREATE]: 'Create a data model',
+    [FORM_MODE.CREATE]: 'ساخت مدل داده',
     [FORM_MODE.EDIT]: name,
   })[formMode];
 

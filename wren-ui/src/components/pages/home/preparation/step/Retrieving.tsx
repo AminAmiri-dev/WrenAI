@@ -20,13 +20,13 @@ export default function Retrieving(props: Props) {
   const data = tables.map((table) => ({ name: table }));
 
   const title = isAdjustment
-    ? 'User-selected models applied'
-    : 'Retrieving top 10 model candidates';
+    ? 'مدل های انتخاب شده کاربر اعمال شد'
+    : 'در حال بازیابی ۱۰ مدل کاندید برتر';
 
   const modelDescription = isAdjustment ? (
-    <>{tables.length} models applied</>
+    <>{tables.length} مدل اعمال شد</>
   ) : (
-    <>Top {tables.length} model candidates identified</>
+    <>{tables.length} مدل کاندید برتر شناسایی شد</>
   );
 
   return (
@@ -35,7 +35,7 @@ export default function Retrieving(props: Props) {
       <div className="gray-7 text-sm mt-1">
         {loading ? (
           <div className="d-flex align-center gx-2">
-            Searching
+            در حال جستجو
             <Spinner className="gray-6" size={12} />
           </div>
         ) : (
