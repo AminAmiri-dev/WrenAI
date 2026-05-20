@@ -27,6 +27,8 @@ RUN yarn add sharp
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
+ARG NEXT_PUBLIC_HIDE_VENDOR_DOC_LINKS=false
+ENV NEXT_PUBLIC_HIDE_VENDOR_DOC_LINKS=${NEXT_PUBLIC_HIDE_VENDOR_DOC_LINKS}
 COPY --from=deps /app/node_modules ./node_modules
 COPY public ./public
 COPY src ./src
@@ -41,6 +43,8 @@ RUN yarn build
 # Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
+ARG NEXT_PUBLIC_HIDE_VENDOR_DOC_LINKS=false
+ENV NEXT_PUBLIC_HIDE_VENDOR_DOC_LINKS=${NEXT_PUBLIC_HIDE_VENDOR_DOC_LINKS}
 
 COPY --from=builder /app/public ./public
 

@@ -1,3 +1,5 @@
+import { HIDE_VENDOR_DOC_LINKS, isVendorDocsUrl } from '@/utils/vendorDocs';
+
 type PatternTranslation = {
   pattern: RegExp;
   replace: (match: RegExpMatchArray) => string;
@@ -518,6 +520,8 @@ const attributes = [
   'data-placeholder',
 ];
 
+const observedAttributes = [...attributes, 'href'];
+
 const skipSelector = [
   'script',
   'style',
@@ -543,6 +547,21 @@ const attributeSkipSelector = [
 
 const hasLatin = /[A-Za-z]/;
 const brandPattern = /\bWren\s*AI\b|\bWrenAI\b|\bWren\b/gi;
+
+function hideVendorDocLinks(root: ParentNode) {
+  if (!HIDE_VENDOR_DOC_LINKS) return;
+
+  const anchors = [
+    ...(root instanceof HTMLAnchorElement ? [root] : []),
+    ...Array.from(root.querySelectorAll?.('a') || []),
+  ];
+
+  anchors.forEach((anchor) => {
+    if (!isVendorDocsUrl(anchor.getAttribute('href'))) return;
+    const target = anchor.closest('[class*="learning__List"]') || anchor;
+    target.remove();
+  });
+}
 
 function translateBrandTerms(value: string) {
   return value.replace(brandPattern, 'داده یار');
@@ -599,6 +618,8 @@ function translateElementAttributes(element: Element) {
 }
 
 function translateTree(root: ParentNode) {
+  hideVendorDocLinks(root);
+
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
   let node = walker.nextNode();
   while (node) {
@@ -636,6 +657,7 @@ export function installPersianDomTranslator() {
         continue;
       }
       if (mutation.type === 'attributes') {
+        hideVendorDocLinks(mutation.target as Element);
         translateElementAttributes(mutation.target as Element);
         continue;
       }
@@ -655,7 +677,7 @@ export function installPersianDomTranslator() {
     childList: true,
     characterData: true,
     attributes: true,
-    attributeFilter: attributes,
+    attributeFilter: observedAttributes,
   });
 
   return () => observer.disconnect();

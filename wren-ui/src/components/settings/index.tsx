@@ -46,6 +46,48 @@ const StyledButton = styled(Button)`
   margin-bottom: 4px;
 `;
 
+const VersionInfo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  margin: 0 16px 16px;
+  padding: 10px 12px;
+  border: 1px solid var(--gray-4);
+  border-radius: 8px;
+  background: var(--gray-2);
+  direction: rtl;
+
+  .version-icon {
+    flex: 0 0 auto;
+    color: var(--geekblue-6);
+    font-size: 14px;
+  }
+
+  .version-label {
+    flex: 0 0 auto;
+    color: var(--gray-8);
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .version-value {
+    flex: 1 1 auto;
+    min-width: 0;
+    color: var(--gray-7);
+    direction: ltr;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      'Liberation Mono', monospace;
+    font-size: 11px;
+    overflow: hidden;
+    text-align: left;
+    text-overflow: ellipsis;
+    unicode-bidi: plaintext;
+    white-space: nowrap;
+  }
+`;
+
 const DynamicComponent = ({
   menu,
   data,
@@ -137,10 +179,11 @@ export default function Settings(props: Props) {
             />
           </div>
           {!!productVersion && (
-            <div className="gray-7 d-flex align-center p-3 px-5">
-              <InfoCircleOutlined className="mr-2 text-sm" />
-              نسخه داده یار: {productVersion}
-            </div>
+            <VersionInfo title={`نسخه داده یار: ${productVersion}`}>
+              <InfoCircleOutlined className="version-icon" />
+              <span className="version-label">نسخه داده یار</span>
+              <span className="version-value">{productVersion}</span>
+            </VersionInfo>
           )}
         </StyledSider>
         <Content className="d-flex flex-column">

@@ -16,6 +16,7 @@ permissions:
 
 env:
   PLATFORM: linux/amd64
+  HIDE_VENDOR_DOC_LINKS: "true"
 
 jobs:
   prepare:
@@ -100,6 +101,8 @@ jobs:
         with:
           context: ./wren-ui
           platforms: ${{ env.PLATFORM }}
+          build-args: |
+            NEXT_PUBLIC_HIDE_VENDOR_DOC_LINKS=${{ env.HIDE_VENDOR_DOC_LINKS }}
           tags: |
             ${{ needs.prepare.outputs.ui_image }}:${{ needs.prepare.outputs.version_tag }}
             ${{ needs.prepare.outputs.ui_image }}:latest
@@ -264,6 +267,7 @@ jobs:
           IBIS_SERVER_IMAGE: ${{ needs.prepare.outputs.ibis_image }}
           WREN_AI_SERVICE_IMAGE: ${{ needs.prepare.outputs.ai_service_image }}
           WREN_UI_IMAGE: ${{ needs.prepare.outputs.ui_image }}
+          NEXT_PUBLIC_HIDE_VENDOR_DOC_LINKS: ${{ env.HIDE_VENDOR_DOC_LINKS }}
         run: |
           set -Eeuo pipefail
 
@@ -291,7 +295,7 @@ jobs:
             -p "$DEPLOY_PORT" \
             -o BatchMode=yes \
             "$DEPLOY_USER@$DEPLOY_HOST" \
-            "DEPLOY_PATH='$DEPLOY_PATH' DEPLOY_BRANCH='$DEPLOY_BRANCH' DEPLOY_REPOSITORY='$DEPLOY_REPOSITORY' VERSION_TAG='$VERSION_TAG' WREN_BOOTSTRAP_IMAGE='$WREN_BOOTSTRAP_IMAGE' WREN_ENGINE_IMAGE='$WREN_ENGINE_IMAGE' IBIS_SERVER_IMAGE='$IBIS_SERVER_IMAGE' WREN_AI_SERVICE_IMAGE='$WREN_AI_SERVICE_IMAGE' WREN_UI_IMAGE='$WREN_UI_IMAGE' GHCR_ACTOR='$GHCR_ACTOR' GHCR_TOKEN='$GHCR_TOKEN' bash -s" <<'REMOTE'
+            "DEPLOY_PATH='$DEPLOY_PATH' DEPLOY_BRANCH='$DEPLOY_BRANCH' DEPLOY_REPOSITORY='$DEPLOY_REPOSITORY' VERSION_TAG='$VERSION_TAG' WREN_BOOTSTRAP_IMAGE='$WREN_BOOTSTRAP_IMAGE' WREN_ENGINE_IMAGE='$WREN_ENGINE_IMAGE' IBIS_SERVER_IMAGE='$IBIS_SERVER_IMAGE' WREN_AI_SERVICE_IMAGE='$WREN_AI_SERVICE_IMAGE' WREN_UI_IMAGE='$WREN_UI_IMAGE' NEXT_PUBLIC_HIDE_VENDOR_DOC_LINKS='$NEXT_PUBLIC_HIDE_VENDOR_DOC_LINKS' GHCR_ACTOR='$GHCR_ACTOR' GHCR_TOKEN='$GHCR_TOKEN' bash -s" <<'REMOTE'
           set -Eeuo pipefail
 
           set_env() {
@@ -339,6 +343,7 @@ jobs:
           set_env WREN_AI_SERVICE_VERSION "$VERSION_TAG"
           set_env WREN_UI_VERSION "$VERSION_TAG"
           set_env TELEMETRY_ENABLED false
+          set_env NEXT_PUBLIC_HIDE_VENDOR_DOC_LINKS "$NEXT_PUBLIC_HIDE_VENDOR_DOC_LINKS"
           set_env AI_SERVICE_FORWARD_PORT 127.0.0.1:5555
           set_env HOST_PORT 127.0.0.1:13000
 

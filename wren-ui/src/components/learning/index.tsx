@@ -22,6 +22,7 @@ import {
 import { nextTick } from '@/utils/time';
 import { ProjectLanguage } from '@/apollo/client/graphql/__types__';
 import { useUpdateCurrentProjectMutation } from '@/apollo/client/graphql/settings.generated';
+import { HIDE_VENDOR_DOC_LINKS } from '@/utils/vendorDocs';
 
 const Progress = styled.div<{ total: number; current: number }>`
   display: block;
@@ -253,6 +254,8 @@ export default function SidebarSection(_props: Props) {
   };
 
   useEffect(() => {
+    if (HIDE_VENDOR_DOC_LINKS) return;
+
     const learningRecord = learningRecordResult?.learningRecord;
     if (learningRecord) {
       setActive(
@@ -318,12 +321,15 @@ export default function SidebarSection(_props: Props) {
   }, [learningRecordResult?.learningRecord, router.pathname]);
 
   useEffect(() => {
+    if (HIDE_VENDOR_DOC_LINKS) return;
     collapseBlock(active);
   }, [active]);
 
   const onCollapseBarClick = () => {
     setActive(!active);
   };
+
+  if (HIDE_VENDOR_DOC_LINKS) return null;
 
   // Hide learning section if the page not in whitelist
   return (

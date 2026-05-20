@@ -1,5 +1,6 @@
 import { Button, Modal, Select, Row, Col, Form, message } from 'antd';
 import { useRouter } from 'next/router';
+import styled from 'styled-components';
 import { Path } from '@/utils/enum';
 import {
   useResetCurrentProjectMutation,
@@ -11,6 +12,24 @@ import { ProjectLanguage } from '@/apollo/client/graphql/__types__';
 interface Props {
   data: { language: string };
 }
+
+const ResetSection = styled.div`
+  margin-top: 26px;
+  text-align: center;
+
+  .reset-title {
+    color: var(--gray-8);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .reset-description {
+    color: var(--gray-6);
+    margin: 8px auto 0;
+    max-width: 520px;
+    line-height: 1.8;
+  }
+`;
 
 export default function ProjectSettings(props: Props) {
   const { data } = props;
@@ -87,14 +106,16 @@ export default function ProjectSettings(props: Props) {
           </Row>
         </Form.Item>
       </Form>
-      <div className="gray-8 mb-2">Reset project</div>
-      <Button type="primary" style={{ width: 70 }} danger onClick={reset}>
-        Reset
-      </Button>
-      <div className="gray-6 mt-1">
-        Please be aware that resetting will delete all current settings and
-        records, including those in the Modeling Page and Home Page threads.
-      </div>
+      <ResetSection>
+        <div className="reset-title">Reset project</div>
+        <Button type="primary" style={{ minWidth: 92 }} danger onClick={reset}>
+          Reset
+        </Button>
+        <div className="reset-description">
+          Please be aware that resetting will delete all current settings and
+          records, including those in the Modeling Page and Home Page threads.
+        </div>
+      </ResetSection>
     </div>
   );
 }
