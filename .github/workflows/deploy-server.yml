@@ -1,4 +1,4 @@
-name: Build and Deploy WrenAI
+name: Build and Deploy Dadeyar
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: deploy-wrenai-server
+  group: deploy-dadeyar-server
   cancel-in-progress: false
 
 permissions:
@@ -312,8 +312,20 @@ jobs:
           cd "$DEPLOY_PATH"
           git config --global --add safe.directory "$DEPLOY_PATH"
           git config --global url."https://github.com/".insteadOf "git@github.com:"
-          git remote set-url origin "$DEPLOY_REPOSITORY"
+          public_repository="$DEPLOY_REPOSITORY"
+          fetch_repository="$public_repository"
+          case "$public_repository" in
+            https://github.com/*)
+              repository_path="${public_repository#https://github.com/}"
+              repository_path="${repository_path%.git}"
+              if [ -n "${GHCR_ACTOR:-}" ] && [ -n "${GHCR_TOKEN:-}" ]; then
+                fetch_repository="https://${GHCR_ACTOR}:${GHCR_TOKEN}@github.com/${repository_path}.git"
+              fi
+              ;;
+          esac
+          git remote set-url origin "$fetch_repository"
           git fetch --prune origin "$DEPLOY_BRANCH"
+          git remote set-url origin "$public_repository"
           git checkout "$DEPLOY_BRANCH"
           git reset --hard "origin/$DEPLOY_BRANCH"
           git submodule sync --recursive

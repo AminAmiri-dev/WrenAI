@@ -1,20 +1,46 @@
-# Security Policy
-## Reporting a Vulnerability
+# سیاست امنیتی داده یار
 
-If you believe you have found a security vulnerability in any Canner-owned repository, please report it to us through coordinated disclosure.
+داده یار محصول شرکت توسعه زیست بوم دیجیتال است و ممکن است به داده‌های حساس، کلیدهای API، تنظیمات سرور و اطلاعات اتصال به منابع داده دسترسی داشته باشد. امنیت این اطلاعات در توسعه، دیپلوی و استفاده روزمره باید جدی گرفته شود.
 
-**Please do not report security vulnerabilities through public GitHub issues, discussions, or pull requests.**
+## نسخه‌های پشتیبانی‌شده
 
-Instead, please send an email to contact[@]cannerdata.com.
+نسخه فعال این مخزن از شاخه `legacy/v1` دیپلوی می‌شود. فقط commitهایی که روی همین شاخه قرار دارند و در GitHub Actions با موفقیت build و deploy شده‌اند، نسخه قابل پشتیبانی محسوب می‌شوند.
 
-Please include as much of the information listed below as you can to help us better understand and resolve the issue:
+## گزارش آسیب‌پذیری
 
-  * The type of issue (e.g., buffer overflow, SQL injection, or cross-site scripting)
-  * Full paths of source file(s) related to the manifestation of the issue
-  * The location of the affected source code (tag/branch/commit or direct URL)
-  * Any special configuration required to reproduce the issue
-  * Step-by-step instructions to reproduce the issue
-  * Proof-of-concept or exploit code (if possible)
-  * Impact of the issue, including how an attacker might exploit the issue
+اگر آسیب‌پذیری امنیتی پیدا کردید:
 
-This information will help us triage your report more quickly.
+- آن را در issue عمومی منتشر نکنید.
+- جزئیات را از طریق کانال خصوصی داخلی پروژه یا مستقیماً به مالک مخزن ارسال کنید.
+- در صورت فعال بودن GitHub Security Advisories، از همان مسیر خصوصی برای ثبت گزارش استفاده کنید.
+- اطلاعات کافی برای بازتولید، دامنه اثر، نسخه یا commit، و پیشنهاد اصلاح را اضافه کنید.
+
+گزارش‌ها محرمانه بررسی می‌شوند و پس از ارزیابی، اصلاح در شاخه امن آماده و سپس منتشر می‌شود.
+
+## موارد حساس
+
+این موارد نباید داخل commit، log عمومی یا پیام‌های قابل مشاهده ذخیره شوند:
+
+- کلیدهای API و tokenها
+- کلید خصوصی SSH
+- رمز پایگاه داده یا منبع داده
+- فایل `.env` واقعی سرور
+- خروجی کامل request و responseهایی که داده محرمانه دارند
+- اطلاعات کاربران، مشتریان یا داده‌های تولیدی سازمان
+
+## مدیریت secretها
+
+- secretهای CI/CD باید در GitHub Secrets نگهداری شوند.
+- secretهای runtime باید روی سرور یا secret manager امن قرار بگیرند.
+- در صورت افشای هر کلید، همان لحظه آن را revoke و مقدار جدید صادر کنید.
+- برای تست، از کلیدهای محدود و کم‌هزینه استفاده کنید.
+
+## وابستگی‌ها و تصویرهای Docker
+
+- تصویرهای Docker باید از workflow رسمی پروژه ساخته شوند.
+- در صورت تغییر base image یا packageهای اصلی، ریسک امنیتی و سازگاری بررسی شود.
+- به‌روزرسانی وابستگی‌ها باید همراه با تست build و smoke test انجام شود.
+
+## دیپلوی امن
+
+دیپلوی از طریق SSH و GitHub Actions انجام می‌شود. دسترسی SSH باید محدود، قابل چرخش و فقط برای سرور هدف باشد. پس از private شدن مخزن، دریافت سورس روی سرور با token موقت GitHub Actions انجام می‌شود و نباید token دائمی در remote سرور ذخیره شود.

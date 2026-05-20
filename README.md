@@ -1,160 +1,108 @@
+<p align="center">
+  <img src="./misc/dadeyar_logo.png" width="84" alt="نشان داده یار" />
+</p>
 
-<p align="center" id="top">
-  <a href="https://getwren.ai/?utm_source=github&utm_medium=title&utm_campaign=readme">
-    <picture>
-      <source media="(prefers-color-scheme: light)" srcset="./misc/wrenai_logo.png">
-      <img src="./misc/wrenai_logo_white.png" width="300px">
-    </picture>
-    <h1 align="center">Wren AI - Open-Source GenBI Agent</h1>
-  </a>
+<h1 align="center">داده یار</h1>
+
+<p align="center">
+  دستیار هوش مصنوعی تحلیل داده، ساخت مدل معنایی، تولید SQL و پاسخ‌گویی فارسی برای تیم‌های داده و کسب‌وکار
 </p>
 
 <p align="center">
-  <a aria-label="Follow us on X" href="https://x.com/getwrenai">
-    <img alt="" src="https://img.shields.io/badge/-@getwrenai-blue?style=for-the-badge&logo=x&logoColor=white&labelColor=gray&logoWidth=20">
-  </a>
-  <a aria-label="Releases" href="https://github.com/canner/WrenAI/releases">
-    <img alt="" src="https://img.shields.io/github/v/release/canner/WrenAI?logo=github&label=GitHub%20Release&color=blue&style=for-the-badge">
-  </a>
-  <a aria-label="License" href="https://github.com/Canner/WrenAI/blob/main/LICENSE">
-    <img alt="" src="https://img.shields.io/github/license/canner/WrenAI?color=blue&style=for-the-badge">
-  </a>
-  <a aria-label="GitHub Stars" href="https://github.com/Canner/WrenAI/stargazers">
-    <img alt="" src="https://img.shields.io/github/stars/canner/WrenAI?style=for-the-badge&logo=github&color=blue&label=Stars">
-  </a>
-  <a href="https://docs.getwren.ai">
-    <img src="https://img.shields.io/badge/docs-online-brightgreen?style=for-the-badge" alt="Docs">
-  </a>
-  <a aria-label="Join the community on GitHub" href="https://discord.gg/5DvshJqG8Z">
-    <img alt="" src="https://img.shields.io/badge/-JOIN%20THE%20COMMUNITY-blue?style=for-the-badge&logo=discord&logoColor=white&labelColor=grey&logoWidth=20">
-  </a>
-  <a aria-label="Canner" href="https://cannerdata.com/?utm_source=github&utm_medium=badge&utm_campaign=readme">
-    <img src="https://img.shields.io/badge/%F0%9F%A7%A1-Made%20by%20Canner-blue?style=for-the-badge">
-  </a>
+  محصول شرکت توسعه زیست بوم دیجیتال
 </p>
 
-<p align="center">
-  <a href="https://trendshift.io/repositories/9263" target="_blank"><img src="https://trendshift.io/api/badge/repositories/9263" alt="Canner%2FWrenAI | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
-</p>
+## معرفی
 
-> Ask your database anything in plain English. Wren AI generates accurate SQL, charts, and BI insights — backed by a semantic layer that keeps LLM outputs grounded and trustworthy.
+داده یار یک پلتفرم متن‌باز و قابل سفارشی‌سازی برای گفت‌وگو با داده‌ها است. کاربر می‌تواند به زبان طبیعی سؤال بپرسد، داده یار ساختار داده را تحلیل کند، SQL مناسب بسازد، نتیجه را نمایش دهد و دانش تولیدشده را برای پرسش‌های بعدی نگه دارد.
 
-<p align="center">
-  <img width="1920" height="1080" alt="1" src="https://github.com/user-attachments/assets/bba9d37a-33e3-49ab-b7cb-32fd6dddc8d1" />
-</p>
+این مخزن نسخه اختصاصی‌شده داده یار برای شرکت توسعه زیست بوم دیجیتال است. نام، ظاهر، تجربه کاربری، تنظیمات دیپلوی و مستندات مخزن با هدف استفاده فارسی، توسعه داخلی و به‌روزرسانی خودکار شخصی‌سازی شده‌اند.
 
-## 😍 Demos
+## قابلیت‌ها
 
-https://github.com/user-attachments/assets/f9c1cb34-5a95-4580-8890-ec9644da4160
+- پرسش و پاسخ روی داده‌ها با زبان طبیعی و پشتیبانی کامل از رابط راست‌به‌چپ
+- تولید SQL، اجرای پرس‌وجو و نمایش نتیجه به صورت جدول یا نمودار
+- ساخت و مدیریت مدل معنایی، رابطه‌ها، ستون‌ها و فیلدهای محاسباتی
+- ذخیره‌سازی دانش، دستورالعمل‌ها و نمونه‌های سؤال و SQL برای پاسخ‌های دقیق‌تر
+- اتصال به منابع داده مختلف و آماده‌سازی داده برای تحلیل
+- تنظیم مدل هوش مصنوعی از طریق فایل‌های پیکربندی و متغیرهای محیطی
+- دیپلوی Docker و به‌روزرسانی خودکار روی سرور با GitHub Actions
 
-▶️ [Watch the full GenBI walkthrough](https://github.com/user-attachments/assets/90ad1d35-bb1e-490b-9676-b29863ff090b) — end-to-end from question to chart
+## معماری کلی
 
-## 💡 Why a Semantic Layer?
+داده یار از چند سرویس مستقل تشکیل شده است:
 
-Feeding raw DDL to an LLM gets you SQL that looks right but means the wrong thing — "revenue" joins the wrong tables, "active user" uses the wrong filter. Wren AI's semantic layer (MDL) encodes your business definitions once, then every generated query is grounded in that shared understanding. The LLM doesn't guess what your metrics mean; the semantic layer tells it.
+- رابط کاربری وب برای کاربر نهایی، مدیریت مدل‌ها، دانش و API
+- سرویس هوش مصنوعی برای تولید SQL، آماده‌سازی پاسخ و هماهنگی مدل‌ها
+- موتور اجرای پرس‌وجو برای ارتباط با لایه داده
+- سرویس اتصال و پیش‌نمایش داده برای منابع مختلف
+- پایگاه برداری برای بازیابی دانش و زمینه‌های مرتبط
+- سرویس‌های کمکی Docker برای راه‌اندازی، نگهداری و دیپلوی
 
-## 🤖 Features
+این جداسازی باعث می‌شود بتوان ظاهر، منطق هوش مصنوعی، اتصال‌های داده و فرآیند دیپلوی را مستقل‌تر توسعه داد.
 
-|                    | What you get | Why it matters |
-|--------------------|--------------|----------------|
-| **Talk to Your Data** | Ask in any language → precise SQL & answers | Slash the SQL learning curve﻿ |
-| **GenBI Insights** | AI-written summaries, charts & reports | Decision-ready context in one click﻿ |
-| **Semantic Layer** | MDL models encode schema, metrics, joins | Keeps LLM outputs accurate & governed﻿ |
-| **Embed via API**  | Generate queries & charts inside your apps ([API Docs](https://wrenai.readme.io/reference/cloud-getting-started)) | Build custom agents, SaaS features, chatbots﻿ ([Streamlit Live Demo](https://huggingface.co/spaces/getWrenAI/wrenai-cloud-api-demo)) |
+## اجرا با Docker
 
-🤩 [Learn more about GenBI](https://getwren.ai/genbi?utm_source=github&utm_medium=content&utm_campaign=readme)
+برای اجرای محلی، Docker و Docker Compose باید نصب باشند.
 
-## 🔌 Data Sources
+```bash
+cd docker
+cp .env.example .env
+cp config.example.yaml config.yaml
+docker compose --env-file .env up -d
+```
 
-| Cloud Warehouses | Databases | Query Engines |
-|-----------------|-----------|---------------|
-| BigQuery | PostgreSQL | Trino |
-| Snowflake | MySQL | Athena (Trino) |
-| Redshift | Microsoft SQL Server | DuckDB |
-| Databricks | ClickHouse | |
-| | Oracle | |
+در ویندوز می‌توانید به جای `cp` از `copy` یا PowerShell استفاده کنید.
 
-Don't see yours? [Vote for it](https://github.com/Canner/WrenAI/discussions/327) — community votes drive our connector roadmap.
+```powershell
+cd docker
+Copy-Item .env.example .env
+Copy-Item config.example.yaml config.yaml
+docker compose --env-file .env up -d
+```
 
-## 🧠 LLM Models
+تنظیمات اصلی در این فایل‌ها انجام می‌شود:
 
-Wren AI works with any LLM provider you're already using:
+- `docker/.env` برای پورت‌ها، نسخه‌ها، آدرس سرویس‌ها و متغیرهای محیطی
+- `docker/config.yaml` برای تنظیمات سرویس هوش مصنوعی و ارائه‌دهنده مدل
+- فایل‌های `docker-compose` برای انتخاب سرویس‌ها و تصویرهای Docker
 
-| Cloud APIs | Platform Services | Self-hosted |
-|-----------|-------------------|-------------|
-| OpenAI | Azure OpenAI | Ollama |
-| Anthropic | Google AI Studio (Gemini) | |
-| DeepSeek | Vertex AI (Gemini + Anthropic) | |
-| Groq | AWS Bedrock | |
-| | Databricks | |
+## توسعه و سفارشی‌سازی
 
-> [!TIP]
-> For best results, use a frontier model (GPT-4o, Claude Sonnet, Gemini Pro). Wren AI works with smaller and local models too — accuracy scales with model capability. See [configuration examples](https://github.com/Canner/WrenAI/tree/main/wren-ai-service/docs/config_examples) for setup guides.
+برای توسعه اختصاصی، این بخش‌ها بیشترین اهمیت را دارند:
 
-## 🚀 Getting Started
+- رابط کاربری: فارسی‌سازی، راست‌به‌چپ، لوگو، تجربه پرسیدن سؤال و صفحات مدیریتی
+- سرویس هوش مصنوعی: انتخاب مدل، تنظیم promptها، مراحل تولید پاسخ و سیاست هزینه
+- مدل‌سازی داده: مدیریت جدول‌ها، رابطه‌ها، کلیدها، پیش‌نمایش و اعتبارسنجی
+- دانش و دستورالعمل‌ها: نگهداری نمونه‌ها، قوانین پاسخ‌دهی و وابستگی‌های داینامیک
+- دیپلوی: ساخت تصویرها، ثبت نسخه زمانی، به‌روزرسانی سرور و بررسی سلامت سرویس‌ها
 
-Three ways to get started — pick what fits:
+پیشنهاد می‌شود تغییرات ظاهری و متنی در همان الگوی موجود پروژه انجام شود تا گرفتن به‌روزرسانی‌های بعدی ساده‌تر بماند.
 
-| Option | Best for | Link |
-|--------|----------|------|
-| **Self-hosted (Docker)** | Full control, local data | [Installation guide](http://docs.getwren.ai/oss/installation?utm_source=github&utm_medium=content&utm_campaign=readme) |
-| **Wren AI Cloud** | Try it without setup | [getwren.ai](https://getwren.ai/?utm_source=github&utm_medium=content&utm_campaign=readme) |
+## دیپلوی خودکار
 
-Compare [OSS vs. Cloud plans](https://docs.getwren.ai/oss/overview/cloud_vs_self_host). Full documentation at [docs.getwren.ai](https://docs.getwren.ai/oss/overview/introduction?utm_source=github&utm_medium=content&utm_campaign=readme).
+روی شاخه `legacy/v1` یک workflow برای ساخت تصویرهای Docker و دیپلوی کامل روی سرور تعریف شده است. با هر push به این شاخه:
 
-<p align="center">
-  <img width="1920" height="1080" alt="2" src="https://github.com/user-attachments/assets/6555f539-9ef2-485d-9135-0071741fda96" />
-</p>
+- نسخه سفارشی با تاریخ، ساعت و hash commit ساخته می‌شود.
+- تصویرهای Docker مورد نیاز build و push می‌شوند.
+- سرور از طریق SSH به‌روزرسانی می‌شود.
+- سورس روی سرور با همان commit هماهنگ می‌شود.
+- سرویس‌ها دوباره بالا می‌آیند و سلامت HTTP/HTTPS بررسی می‌شود.
 
-## 🏗️ Architecture
+workflow برای مخزن private نیز آماده شده است و هنگام fetch روی سرور از token خود GitHub Actions استفاده می‌کند.
 
-<p align="center">
-  <img width="1011" height="682" alt="wrenai-architecture" src="https://github.com/user-attachments/assets/e99b999f-9912-4fa7-921a-9c86b6b83354" />
-</p>
+## امنیت
 
-User questions flow from the Next.js UI → Apollo GraphQL → AI Service (RAG + LLM) → Wren Engine (semantic query execution) → your database. The semantic layer (MDL) sits at the center, making sure the LLM's SQL reflects your actual business definitions.
+کلیدهای API، کلید SSH، رمزها و تنظیمات حساس نباید داخل سورس commit شوند. این موارد باید در GitHub Secrets، فایل `.env` سرور یا کانال امن داخلی نگهداری شوند. جزئیات بیشتر در [SECURITY.md](./SECURITY.md) آمده است.
 
-👉 [Deep dive into the design](https://getwren.ai/post/how-we-design-our-semantic-engine-for-llms-the-backbone-of-the-semantic-layer-for-llm-architecture?utm_source=github&utm_medium=content&utm_campaign=readme)
+## مشارکت
 
-## 🧑‍💻 For Developers
+راهنمای توسعه، استاندارد commit، نکات فارسی‌سازی و مسیر ارسال تغییرات در [CONTRIBUTING.md](./CONTRIBUTING.md) توضیح داده شده است.
 
-WrenAI is a full-stack AI system with interesting problems at every layer — semantic modeling, RAG retrieval, LLM-driven SQL generation, and query execution across heterogeneous data sources. Here's what the stack actually looks like under the hood:
+## رفتار حرفه‌ای
 
-| Layer | What it does |
-|-------|-------------|
-| **wren-ui** | Next.js + Apollo GraphQL — semantic modeling UI and the BFF that wires everything together |
-| **wren-ai-service** | Python/FastAPI pipeline — intent classification, vector retrieval from Qdrant, LLM prompting, and SQL correction loops |
-| **[wren-engine](https://github.com/Canner/wren-engine)** | Rust + Apache DataFusion — the query execution core that resolves MDL semantics (metrics, joins, access controls) before SQL reaches the database |
+همه مشارکت‌کنندگان باید فضای همکاری محترمانه، امن و حرفه‌ای را حفظ کنند. جزئیات در [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) قرار دارد.
 
-**[wren-engine](https://github.com/Canner/wren-engine)** is a separate open-source project and the part of the stack closest to the metal. It's where MDL definitions get translated into actual query plans across 15+ data sources. If you work with Rust, DataFusion, or database connectors, it's worth a look — the codebase is approachable and there are real unsolved problems around query planning, semantic resolution, and MCP (Model Context Protocol) agent integration.
+## مجوز
 
-Some areas where contributions tend to have the most impact across both repos:
-
-- **Data source connectors** — wren-engine supports 15+ sources; new connectors are always useful
-- **MCP integration** — wren-engine exposes an MCP server; agent-native workflows are still early and evolving
-- **SQL generation quality** — prompt engineering, correction loop heuristics, and eval harnesses in wren-ai-service
-- **Semantic layer tooling** — MDL schema inference, validation, and developer ergonomics in wren-ui
-
-## 🛠️ Contribution
-
-1.	Read [Contribution Guidelines](https://github.com/Canner/WrenAI/blob/main/CONTRIBUTING.md) for setup & PR guidelines.
-2.	Open an issue for bugs, feature requests, or discussion.
-3.	If Wren AI is useful to you, a ⭐ goes a long way — it helps more people find the project.
-
-## ⭐️ Community
-
-- Join 1.7k+ developers in our [Discord](https://discord.gg/5DvshJqG8Z) for real-time help and roadmap previews.
-- Visit [GitHub Issues](https://github.com/Canner/WrenAI/issues) for bugs and feature requests.
-- Explore our [public roadmap](https://wrenai.notion.site/) to see what's coming next.
-- [Subscribe to our blog](https://www.getwren.ai/blog/?utm_source=github&utm_medium=content&utm_campaign=readme) · [Follow us on LinkedIn](https://www.linkedin.com/company/wrenai)
-
-We follow a [Code of Conduct](./CODE_OF_CONDUCT.md) to keep the community welcoming for everyone.
-
-## 🎉 Our Contributors
-<a href="https://github.com/canner/wrenAI/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Canner/WrenAI" />
-</a>
-
-<p align="right">
-  <a href="#top">⬆️ Back to Top</a>
-</p>
+کد پروژه بر پایه مجوز `GNU Affero General Public License v3.0` یا نسخه‌های بعدی منتشر می‌شود. تغییرات اختصاصی، برند، لوگو و مستندات فارسی داده یار متعلق به شرکت توسعه زیست بوم دیجیتال است. متن کامل‌تر در [LICENSE](./LICENSE) آمده است.
