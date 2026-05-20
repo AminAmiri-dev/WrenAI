@@ -22,6 +22,7 @@ export default function LogoBar() {
         width={28}
         height={28}
         priority
+        unoptimized
       />
       <span>داده یار</span>
     </Brand>

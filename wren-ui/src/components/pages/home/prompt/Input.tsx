@@ -9,7 +9,7 @@ const InputShell = styled.div`
   gap: 8px;
   width: 100%;
   direction: ltr;
-  min-height: 52px;
+  min-height: 46px;
 `;
 
 const StyledTextArea = styled(Input.TextArea)`
@@ -184,6 +184,7 @@ export default function PromptInput(props: Props) {
         onClick={handleAsk}
         disabled={isDisabled}
         aria-label="پرسیدن"
+        data-testid="dadeyar-prompt-send"
       >
         <SendWaveIcon aria-hidden="true">
           <span />

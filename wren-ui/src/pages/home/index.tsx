@@ -56,6 +56,7 @@ const Wrapper = ({ children }) => {
           width={46}
           height={46}
           priority
+          unoptimized
         />
       </div>
       <div className="adm-home-title">درباره داده هایتان سوال بپرسید</div>

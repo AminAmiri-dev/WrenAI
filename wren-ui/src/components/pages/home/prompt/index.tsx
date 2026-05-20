@@ -46,7 +46,7 @@ const PromptStyle = styled.div`
   bottom: 24px;
   transform: translateX(-50%);
   z-index: 999;
-  padding: 6px 8px 6px 18px;
+  padding: 5px 8px 5px 18px;
   border-radius: 999px;
   border: 1px solid rgba(15, 23, 42, 0.16);
   background: #fff;
@@ -176,7 +176,7 @@ export default forwardRef<Attributes, Props>(function Prompt(props, ref) {
   );
 
   return (
-    <PromptStyle className="d-flex align-end">
+    <PromptStyle className="d-flex align-center" data-testid="dadeyar-prompt">
       <PromptInput
         question={question}
         isProcessing={isProcessing}
